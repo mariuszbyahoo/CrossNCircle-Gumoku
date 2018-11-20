@@ -4,10 +4,10 @@ public class CrossNCircleGame {
         Data data = new Data();
         while(game = true) {
             data.printTable();
-            data.moveO();
+            data.move("O");
             data.printTable();
             data.checkEnd();
-            data.moveX();
+            data.move("X");
             data.printTable();
             data.checkEnd();
             if(data.gameOver == true){

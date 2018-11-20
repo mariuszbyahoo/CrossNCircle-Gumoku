@@ -15,9 +15,7 @@ public class Data {
         System.out.println("C "+tab[2][0]+"|"+tab[2][1]+"|"+tab[2][2]);
 
     }
-
-
-    public void moveO(){
+    public void move(String val){
         int y=0;
         int x=0;
         Scanner input = new Scanner(System.in);
@@ -36,38 +34,11 @@ public class Data {
         }
 
 
-        if (tab[y][x]!=" "){
+        if (!tab[y][x].equals(" ")){
             System.out.println("Pole zajęte, spróbuj jeszcze raz");
         }else {
-            tab[y][x] = "O";
+            tab[y][x] = val;
         }
-
-    }
-    public void moveX(){
-        int y=0;
-        int x=0;
-        Scanner input = new Scanner(System.in);
-        command=input.nextInt();
-
-        if (command >=1&&command<=3){
-            x = command-1;
-            command=input.nextInt();
-            if(command>=1&&command<=3){
-                y = command-1;
-            }else {
-                System.out.println("Niepoprawny ruch");
-            }
-        }else {
-            System.out.println("Niepoprawny ruch");
-        }
-
-
-        if (tab[y][x]!=" "){
-            System.out.println("Pole zajęte, spróbuj jeszcze raz");
-        }else {
-            tab[y][x] = "X";
-        }
-
     }
     public void checkEnd(){
         //sprawdzanie linii poziomych

@@ -7,13 +7,19 @@ public class Data {
 
 
     public void printTable(){
-        System.out.println("  1 2 3 ");
-        System.out.println("A "+tab[0][0]+"|"+tab[0][1]+"|"+tab[0][2]);
-        System.out.println("--------");
-        System.out.println("B "+tab[1][0]+"|"+tab[1][1]+"|"+tab[1][2]);
-        System.out.println("--------");
-        System.out.println("C "+tab[2][0]+"|"+tab[2][1]+"|"+tab[2][2]);
-
+        System.out.println("  1 2 3");
+        // dla obsłużenia tablicy dwuwymiarowej, żeby była dalej zachowana możliwość rozszerzania tablicy w obydwu wymiarach
+        // potrzebne jest wykonanie pętli for dla wymiaru pierwszego i zagnieździć w nim pętlę for dla wymiaru drugiego,
+        // co ciekawe pokazuje się metoda pokazująca "długość" drugiego wymiaru; tab[i].length
+        // jako że na początku pętla drukuje obydwa wymiary w jednym wierszu, potrzebne jest po zamknięciu pętli drugiego wymiaru
+        // wydrukowanie znaku nowej linii - pusty sout.
+        for(int i = 0; i<tab.length;i++){
+            System.out.print(i+1);
+            for(int j=0; j<tab[i].length;j++){
+                System.out.print("|"+tab[i][j]);
+            }
+            System.out.println("|");
+        }
     }
     public void move(String val){
         int y=0;

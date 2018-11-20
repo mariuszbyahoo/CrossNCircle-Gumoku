@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Data {
-    private String command = new String();
+    private int command;
     private String [][] tab = {{" "," "," "},{" "," "," "},{" "," "," "}};
     public boolean gameOver = false;
 
@@ -21,75 +21,52 @@ public class Data {
         int y=0;
         int x=0;
         Scanner input = new Scanner(System.in);
-        command=input.nextLine();
+        command=input.nextInt();
 
-        if (command.length()!=2){
-            System.out.println("Błędna komenda, spróbuj jeszcze raz");
-
-        }else if (command.charAt(0)!='a'&&command.charAt(0)!='b'&&command.charAt(0)!='c'){
-            System.out.println("Zła litera, musi by a b lub c, koniecznie małe litery");
-
-        }else if (command.charAt(1)!='1'&&command.charAt(1)!='2'&&command.charAt(1)!='3'){
-            System.out.println("Zła cyfra, może być tylko 1 2 lub 3");
+        if (command >=1&&command<=3){
+            x = command-1;
+            command=input.nextInt();
+            if(command>=1&&command<=3){
+                y = command-1;
+            }else {
+                System.out.println("Niepoprawny ruch");
+            }
+        }else {
+            System.out.println("Niepoprawny ruch");
         }
 
-        if(command.charAt(0)=='a'){
-            y=0;
-        }else if(command.charAt(0)=='b'){
-            y=1;
-        }else if(command.charAt(0)=='c'){
-            y=2;
-        }
 
-        if(command.charAt(1)==1){
-            x=0;
-        }else if(command.charAt(1)==2){
-            x=1;
-        }else if(command.charAt(1)==3){
-            x=2;
-        }
         if (tab[y][x]!=" "){
             System.out.println("Pole zajęte, spróbuj jeszcze raz");
-            return;
+        }else {
+            tab[y][x] = "O";
         }
-        tab[y][x] = "O";
 
     }
     public void moveX(){
         int y=0;
         int x=0;
         Scanner input = new Scanner(System.in);
-        command=input.nextLine();
+        command=input.nextInt();
 
-        if (command.length()!=2){
-            System.out.println("Błędna komenda, spróbuj jeszcze raz");
-
-        }else if (command.charAt(0)!='a'&&command.charAt(0)!='b'&&command.charAt(0)!='c'){
-            System.out.println("Zła litera, musi by a b lub c, koniecznie małe litery");
-
-        }else if (command.charAt(1)!='1'&&command.charAt(1)!='2'&&command.charAt(1)!='3'){
-            System.out.println("Zła cyfra, może być tylko 1 2 lub 3");
+        if (command >=1&&command<=3){
+            x = command-1;
+            command=input.nextInt();
+            if(command>=1&&command<=3){
+                y = command-1;
+            }else {
+                System.out.println("Niepoprawny ruch");
+            }
+        }else {
+            System.out.println("Niepoprawny ruch");
         }
 
-        if(command.charAt(0)=='a'){
-            y=0;
-        }else if(command.charAt(0)=='b'){
-            y=1;
-        }else if(command.charAt(0)=='c'){
-            y=2;
-        }
 
-        if(command.charAt(1)==1){
-            x=0;
-        }else if(command.charAt(1)==2){
-            x=1;
-        }else if(command.charAt(1)==3){
-            x=2;
-        }
-        if (tab[x][y]!=" "){
+        if (tab[y][x]!=" "){
             System.out.println("Pole zajęte, spróbuj jeszcze raz");
+        }else {
+            tab[y][x] = "X";
         }
-        tab[x][y] = "X";
 
     }
     public void checkEnd(){

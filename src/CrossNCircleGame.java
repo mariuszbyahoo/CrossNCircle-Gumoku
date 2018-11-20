@@ -1,8 +1,8 @@
 public class CrossNCircleGame {
     public static void main (String[]args){
         boolean game = true;
+        Data data = new Data();
         while(game = true) {
-            Data data = new Data();
             data.printTable();
             data.moveO();
             data.printTable();

@@ -55,7 +55,10 @@ public class Data {
         //wiersza osobno
         this.gameOver = checkEndInRow(0)
                         || checkEndInRow(1)
-                        || checkEndInRow(2);
+                        || checkEndInRow(2)
+                        || checkEndInColumn(0)
+                        || checkEndInColumn(1)
+                        || checkEndInColumn(2);
     }
     public boolean checkEndInRow(int rowNumber){
         boolean gameOver = true;
@@ -63,6 +66,19 @@ public class Data {
             String current = tab[rowNumber][i];
             String previous = tab[rowNumber][i-1];
             if (current.equals(" ") || !current.equals(previous)){
+                gameOver = false;
+                break;
+            }
+        }
+        return gameOver;
+    }
+    public boolean checkEndInColumn(int columnNumber){
+        boolean gameOver = true;
+        for(int i=1; i<tab.length; i++){
+            String current = tab[i][columnNumber];
+            String previous = tab[i-1][columnNumber];
+
+            if(current.equals(" ") || !current.equals(previous)){
                 gameOver = false;
                 break;
             }

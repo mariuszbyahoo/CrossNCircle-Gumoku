@@ -7,6 +7,9 @@ public class CrossNCircleGame {
             data.move("O");
             data.printTable();
             data.checkEnd();
+            if(data.gameOver == true){
+                break;
+            }
             data.move("X");
             data.printTable();
             data.checkEnd();

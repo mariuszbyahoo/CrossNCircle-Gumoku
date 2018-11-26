@@ -13,6 +13,7 @@ public class Data {
         // co ciekawe pokazuje się metoda pokazująca "długość" drugiego wymiaru; tab[i].length
         // jako że na początku pętla drukuje obydwa wymiary w jednym wierszu, potrzebne jest po zamknięciu pętli drugiego wymiaru
         // wydrukowanie znaku nowej linii - pusty sout.
+
         for(int i = 0; i<tab.length;i++){
             System.out.print(i+1);
             for(int j=0; j<tab[i].length;j++){
@@ -48,21 +49,24 @@ public class Data {
     }
     public void checkEnd(){
         //sprawdzanie linii poziomych
-        if ((tab[0][0] != " " && tab[0][1] != " " && tab[0][2]!=" ")||(tab[1][0]!=" "&&tab[1][1]!=" "&&tab[1][2]!=" ")||(tab[2][0]!=" "&&tab[2][1]!=" "&&tab[2][2]!=" ")) {
-            System.out.println("Gra Zakończona, aby zrestartować grę, wpisz w konsoli \"restart\"");
-            gameOver = true;
-        //sprawdzanie linii pionowych
-        }else if((tab[0][0]!=" "&&tab[1][0]!=" "&&tab[2][0]!=" ")||(tab[0][1]!=" "&&tab[1][1]!=" "&&tab[2][1]!=" ")||(tab[0][2]!=" "&&tab[1][2]!=" "&&tab[2][2]!=" ")){
-            System.out.println("Gra zakończona, aby zrestartować grę, wpisz w konsoli\"restart\"");
-            gameOver = true;
-        //Sprawdzanie prostej pod kątem
-            //Dokończ pisanie warunków zakończenia gry, dopisz też jak zrobić by gra się wyłączyła po skończonej grze i poprosiła o
-            //Komendę Restart.
-        }else if((tab[0][0]!=" "&&tab[1][1]!=" "&&tab[2][2]!=" ")||(tab[0][2]!=" "&&tab[1][1]!=" "&&tab[2][0]!=" ")){
-            System.out.println("Gra zakończona, aby zrestartować grę, wpisz w konsoli \"restart\"");
-            gameOver = true;
-        }else{
-            System.out.println("Gramy dalej...");
+        // zawsze gdy wpiszę "tab.length" to w domyśle będzie chodziło o wszystkie elementy PIERWSZEGO wymiaru tablicy tab
+
+        // na razie zrobione jest sprawdzanie tylko wierszy, od jeden do trzy i jest to rozwiązanie tymczas. Pętla for dla każdego
+        //wiersza osobno
+        this.gameOver = checkEndInRow(0)
+                        || checkEndInRow(1)
+                        || checkEndInRow(2);
+    }
+    public boolean checkEndInRow(int rowNumber){
+        boolean gameOver = true;
+        for(int i=1; i<tab[rowNumber].length;i++){
+            String current = tab[rowNumber][i];
+            String previous = tab[rowNumber][i-1];
+            if (current.equals(" ") || !current.equals(previous)){
+                gameOver = false;
+                break;
+            }
         }
+        return gameOver;
     }
 }

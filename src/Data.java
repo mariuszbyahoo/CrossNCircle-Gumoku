@@ -55,14 +55,29 @@ public class Data {
 
         // na razie zrobione jest sprawdzanie tylko wierszy, od jeden do trzy i jest to rozwiązanie tymczas. Pętla for dla każdego
         //wiersza osobno
-        this.gameOver = checkEndInRow(0)
-                || checkEndInRow(1)
-                || checkEndInRow(2)
-                || checkEndInColumn(0)
-                || checkEndInColumn(1)
-                || checkEndInColumn(2)
-                || checkEndInSlash()
-                || checkEndInReverseSlash();
+        this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();
+    }
+
+    private boolean endGameInColumn() {
+        boolean result = false;
+        for (int i = 0 ; i < tab.length ; i++){
+            if(checkEndInColumn(i)){
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    private boolean endGameInRow() {
+        boolean result = false;
+        for (int i = 0 ; i < tab.length ; i++){
+            if(checkEndInRow(i)){
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     public boolean checkEndInRow(int rowNumber) {

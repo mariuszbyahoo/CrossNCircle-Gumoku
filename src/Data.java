@@ -50,11 +50,6 @@ public class Data {
     }
 
     public void checkEnd() {
-        //sprawdzanie linii poziomych
-        // zawsze gdy wpiszę "tab.length" to w domyśle będzie chodziło o wszystkie elementy PIERWSZEGO wymiaru tablicy tab
-
-        // na razie zrobione jest sprawdzanie tylko wierszy, od jeden do trzy i jest to rozwiązanie tymczas. Pętla for dla każdego
-        //wiersza osobno
         this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();
     }
 
@@ -106,20 +101,24 @@ public class Data {
         }
         return gameOver;
     }
-
-    public boolean checkEndInSlash() {
-        return !(tab [0][0].equals(" ")
-                || tab[1][1].equals(" ")
-                || tab[2][2].equals(" ")
-                || !tab[0][0].equals(tab[1][1])
-                || !tab[2][2].equals(tab[1][1]));
+    public boolean checkEndInSlash(){
+        boolean result = true;
+        for(int i = 1 ; i < tab.length ; i++){
+            if(tab[i][i].equals(" ") || !tab[i][i].equals(tab[i-1][i-1])){
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
     public boolean checkEndInReverseSlash(){
-        return !(tab[0][2].equals(" ")
-                || tab[1][1].equals(" ")
-                || tab[2][0].equals(" ")
-                || !tab[0][2].equals(tab[1][1])
-                || !tab[2][0].equals(tab[1][1]));
-
+        boolean result = true;
+        for(int i = 1 , j = tab.length - 2 ; i < tab.length && j >= 0 ; i++ , j--){
+            if(tab[i][j].equals(" ") || !tab[i][j].equals(tab[i-1][j+1])){
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }

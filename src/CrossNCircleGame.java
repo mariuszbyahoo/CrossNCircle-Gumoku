@@ -6,7 +6,8 @@ public class CrossNCircleGame {
         boolean game = true;
         System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło");
         int choice = input.nextInt();
-        Data data = new Data();
+        System.out.println("Jak duża plansza?");
+        Data data = new Data(input.nextInt());
             while (game = true) {
                 data.printTable();
                 data.move("O");

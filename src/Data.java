@@ -2,8 +2,19 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Data {
+    public Data (int x){
+        tab = new String[x][x];
+        initTable();
+    }
     private int command;
-    private String[][] tab = {{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}};
+    private String[][] tab;
+    public void initTable(){
+        for (int i = 0 ; i < tab.length ; i ++){
+            for (int j = 0 ; j < tab.length ; j ++){
+                tab[i][j] = " ";
+            }
+        }
+    }
     public boolean gameOver = false;
 
     public void printTable() {
@@ -29,10 +40,10 @@ public class Data {
         Scanner input = new Scanner(System.in);
         command = input.nextInt();
 
-        if (command >= 1 && command <= 3) {
+        if (command >= 1 && command <= tab.length) {
             x = command - 1;
             command = input.nextInt();
-            if (command >= 1 && command <= 3) {
+            if (command >= 1 && command <= tab.length) {
                 y = command - 1;
             } else {
                 System.out.println("Niepoprawny ruch");

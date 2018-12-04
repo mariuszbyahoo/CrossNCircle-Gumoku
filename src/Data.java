@@ -1,10 +1,10 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Data {
     private int command;
     private String[][] tab = {{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}};
     public boolean gameOver = false;
-
 
     public void printTable() {
         System.out.println("  1 2 3");
@@ -46,6 +46,17 @@ public class Data {
             System.out.println("Pole zajęte, spróbuj jeszcze raz");
         } else {
             tab[y][x] = val;
+        }
+    }
+    public void moveAi(String val) {
+        while (true){
+            Random rn = new Random();
+            int x = rn.nextInt(tab.length);
+            int y = rn.nextInt(tab.length);
+            if (tab[y][x].equals(" ")) {
+                tab[y][x] = val;
+                break;
+            }
         }
     }
 

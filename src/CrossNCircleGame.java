@@ -10,13 +10,12 @@ public class CrossNCircleGame {
             if(data.gameOver == true){
                 break;
             }
-            data.move("X");
+            data.moveAi("X");
             data.printTable();
             data.checkEnd();
             if(data.gameOver == true){
                 break;
             }
-// teraz gra nie zapamiętuje powstawianych pól, po drugie nie ważne jaką liczbę się wpisze czy a1 czy a3 i tak wstawia znak w kolumnie 1
         }
     }
 }

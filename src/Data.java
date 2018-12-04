@@ -18,7 +18,11 @@ public class Data {
     public boolean gameOver = false;
 
     public void printTable() {
-        System.out.println("  1 2 3");
+        System.out.print(" ");
+        for ( int i = 0 ; i < tab.length ; i ++){
+            System.out.print(" "+(i+1));
+        }
+        System.out.println();
         // dla obsłużenia tablicy dwuwymiarowej, żeby była dalej zachowana możliwość rozszerzania tablicy w obydwu wymiarach
         // potrzebne jest wykonanie pętli for dla wymiaru pierwszego i zagnieździć w nim pętlę for dla wymiaru drugiego,
         // co ciekawe pokazuje się metoda pokazująca "długość" drugiego wymiaru; tab[i].length

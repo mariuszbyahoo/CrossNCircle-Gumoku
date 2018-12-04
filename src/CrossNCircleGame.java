@@ -7,7 +7,6 @@ public class CrossNCircleGame {
         System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło");
         int choice = input.nextInt();
         Data data = new Data();
-        if (choice == 1) {
             while (game = true) {
                 data.printTable();
                 data.move("O");
@@ -16,29 +15,16 @@ public class CrossNCircleGame {
                 if (data.gameOver == true) {
                     break;
                 }
-                data.moveAi("X");
+                if(choice == 1) {
+                    data.moveAi("X");
+                }else{
+                    data.move("X");
+                }
                 data.printTable();
                 data.checkEnd();
                 if (data.gameOver == true) {
                     break;
                 }
             }
-        } else {
-            while (game = true) {
-                data.printTable();
-                data.move("O");
-                data.printTable();
-                data.checkEnd();
-                if (data.gameOver == true) {
-                    break;
-                }
-                data.move("X");
-                data.printTable();
-                data.checkEnd();
-                if (data.gameOver == true) {
-                    break;
-                }
-            }
-        }
     }
 }

@@ -80,12 +80,12 @@ public class Data {
         if (round == 1) {
             if (tab[0][0].equals(" ")) {
                 tab[0][0] = val;
-            } else if (tab[2][2].equals(" ")) {
-                tab[2][2] = val;
-            } else if (tab[0][2].equals(" ")) {
-                tab[0][2] = val;
-            } else if (tab[2][0].equals(" ")) {
-                tab[2][0] = val;
+            } else if (tab[tab.length-1][tab.length-1].equals(" ")) {
+                tab[tab.length-1][tab.length-1] = val;
+            } else if (tab[0][tab.length-1].equals(" ")) {
+                tab[0][tab.length-1] = val;
+            } else if (tab[tab.length-1][0].equals(" ")) {
+                tab[tab.length-1][0] = val;
             }
         } else {
             for (int i = 0; i<tab.length ; i++){

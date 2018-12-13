@@ -86,9 +86,19 @@ public class Data {
                 for (int j = 0; j<tab[i].length ; j++){
                     if(tab[i][j].equals(" ")){
                         if (val.equals("X")){
+                            tab[i][j] = "X";
+                            this.checkEnd();
+                            if(this.gameOver){
+                                this.gameOver = false;
+                                return;
+                            }else {
+                                tab[i][j] = " ";
+                            }
+                        }
+                        if (val.equals("X")){
                             tab[i][j] = "O";
                             this.checkEnd();
-                            if(this.gameOver == true){
+                            if(this.gameOver){
                                 tab[i][j] = "X";
                                 this.gameOver = false;
                                 return;

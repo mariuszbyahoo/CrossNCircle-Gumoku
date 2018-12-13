@@ -44,11 +44,12 @@ public class Data {
         }
     }
 
-    public void move(String val) {
+    public boolean move(String val) {
         int y = 0;
         int x = 0;
         Scanner input = new Scanner(System.in);
         command = input.nextInt();
+        boolean result = true;
 
         if (command >= 1 && command <= tab.length) {
             x = command - 1;
@@ -57,17 +58,22 @@ public class Data {
                 y = command - 1;
             } else {
                 System.out.println("Niepoprawny ruch");
+                result = false;
             }
         } else {
             System.out.println("Niepoprawny ruch");
+            result = false;
         }
 
 
         if (!tab[y][x].equals(" ")) {
             System.out.println("Pole zajęte, spróbuj jeszcze raz");
+            result = false;
         } else {
             tab[y][x] = val;
+
         }
+        return result;
     }
 
     public void moveAi(String val) {

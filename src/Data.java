@@ -88,33 +88,41 @@ public class Data {
                 tab[tab.length-1][0] = val;
             }
         } else {
-            for (int i = 0; i<tab.length ; i++){
-                for (int j = 0; j<tab[i].length ; j++){
-                    if(tab[i][j].equals(" ")){
-                        if (val.equals("X")){
-                            tab[i][j] = "X";
-                            this.checkEnd();
-                            if(this.gameOver){
-                                this.gameOver = false;
-                                return;
-                            }else {
-                                tab[i][j] = " ";
-                            }
-                        }
-                        if (val.equals("X")){
-                            tab[i][j] = "O";
-                            this.checkEnd();
-                            if(this.gameOver){
-                                tab[i][j] = "X";
-                                this.gameOver = false;
-                                return;
-                            }else {
-                                tab[i][j] = " ";
+                for (int i = 0; i < tab.length; i++) {
+                    for (int j = 0; j < tab[i].length; j++) {
+                        if (tab[i][j].equals(" ")) {
+                                tab[i][j] = val;
+                                this.checkEnd();
+                                if (this.gameOver) {
+                                    this.gameOver = false;
+                                    return;
+                                } else {
+                                    tab[i][j] = " ";
+                                }
+                                tab[i][j] = val.equals("X") ? "O" : "X";
+// napis w linii powyżej można przetłumaczyć jako "Jeśli val to krzyżyk, to do zmiennej przypisz kółko, w przeciwnym przypadku przypisz krzyżyk
+// taka konstrukcja nazywa się "Ternary operator"
+/*
+Można go zapisać także w ten sposób jak poniżej:
+if (val.equals("X")){
+tab[i][j] = "O";
+}else {
+tab[i][j] = "X";
+}
+*/
+//Zadanie domowe ->>> jak to zrobić, żeby użytkownik miał wybór, czy gra kółkiem czy krzyżykiem?
+                                this.checkEnd();
+                                if (this.gameOver) {
+                                    tab[i][j] = val;
+                                    this.gameOver = false;
+                                    return;
+                                } else {
+                                    tab[i][j] = " ";
+                                }
                             }
                         }
                     }
                 }
-            }
             while (true){
                 Random rn = new Random();
                 int x = rn.nextInt(tab.length);
@@ -125,7 +133,6 @@ public class Data {
                 }
             }
         }
-    }
 
     public void checkEnd() {
         this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();

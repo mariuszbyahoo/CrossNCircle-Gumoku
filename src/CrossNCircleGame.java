@@ -28,7 +28,7 @@ public class CrossNCircleGame {
             }
         }
 
-        while (game = true) {
+        while (game == true) {
             data.printTable();
             while (!moveWasDone) {
                 moveWasDone = data.move(type);
@@ -45,7 +45,7 @@ public class CrossNCircleGame {
                 }else if(type.equals("X")){
                     data.moveAi("O");
                 }
-            } else {
+            }else{
                 while (!moveWasDone) {
                     if (type.equals("O")){
                         moveWasDone = data.move("X");

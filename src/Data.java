@@ -122,7 +122,7 @@ tab[i][j] = "X";
                             }
                         }
                     }
-                }
+
             while (true){
                 Random rn = new Random();
                 int x = rn.nextInt(tab.length);
@@ -133,6 +133,7 @@ tab[i][j] = "X";
                 }
             }
         }
+    }
 
     public void checkEnd() {
         this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();

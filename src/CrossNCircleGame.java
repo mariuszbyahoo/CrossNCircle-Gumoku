@@ -45,6 +45,7 @@ public class CrossNCircleGame {
                 }else if(type.equals("X")){
                     data.moveAi("O");
                 }
+                moveWasDone = false;
             }else{
                 while (!moveWasDone) {
                     if (type.equals("O")){

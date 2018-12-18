@@ -6,13 +6,13 @@ public class CrossNCircleGame {
         Scanner input2 = new Scanner(System.in);
         boolean game = true;
         boolean moveWasDone = false;
-        System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło");
+        System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło \n2-> komputer kontra komputer");
         int choice = input.nextInt();
 
         System.out.println("Jak duża plansza?");
         Data data = new Data(input.nextInt());
 
-        System.out.println("Grasz kólkiem (O) czy krzyżykiem (X)?");
+        System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         boolean proper = false;
         String type = input2.nextLine();
         while (!proper) {
@@ -30,16 +30,24 @@ public class CrossNCircleGame {
 
         while (game == true) {
             data.printTable();
-            while (!moveWasDone) {
-                moveWasDone = data.move(type);
-                data.printTable();
+            if (choice == 2){
+                if (type.equals("O")){
+                    data.moveAi("O");
+                }else {
+                    data.moveAi("X");
+                }
+            }else {
+                while (!moveWasDone) {
+                    moveWasDone = data.move(type);
+                    data.printTable();
+                }
             }
             moveWasDone = false;
             data.checkEnd();
             if (data.gameOver == true) {
                 break;
             }
-            if (choice == 1) {
+            if (choice == 1 || choice == 2) {
                 if (type.equals("O")){
                     data.moveAi("X");
                 }else if(type.equals("X")){

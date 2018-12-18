@@ -1,5 +1,7 @@
 package pl.budzisz.mariusz.cross_n_circle;
 
+import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,18 +9,19 @@ public class Data {
     public static int round = 1;
     private int x;
 
+    private int command;
+    private Figures[][] tab;
+
     public Data(int x) {
-        tab = new String[x][x];
+        tab = new Figures[x][x];
         initTable();
     }
 
-    private int command;
-    private String[][] tab;
 
     public void initTable() {
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab.length; j++) {
-                tab[i][j] = " ";
+                tab[i][j] = Figures.EMPTY;
             }
         }
     }
@@ -46,7 +49,7 @@ public class Data {
         }
     }
 
-    public boolean move(String val) {
+    public boolean move(Figures figure) {
         int y = 0;
         int x = 0;
         Scanner input = new Scanner(System.in);
@@ -68,45 +71,45 @@ public class Data {
         }
 
 
-        if (!tab[y][x].equals(" ")) {
+        if (!tab[y][x].equals(Figures.EMPTY)) {
             System.out.println("Pole zajęte, spróbuj jeszcze raz");
             result = false;
         } else {
-            tab[y][x] = val;
+            tab[y][x] = figure;
 
         }
         return result;
     }
 
-    public void moveAi(String val) {
+    public void moveAi(Figures figure) {
         if (round == 1) {
-            if (tab[0][0].equals(" ")) {
-                tab[0][0] = val;
-            } else if (tab[tab.length-1][tab.length-1].equals(" ")) {
-                tab[tab.length-1][tab.length-1] = val;
-            } else if (tab[0][tab.length-1].equals(" ")) {
-                tab[0][tab.length-1] = val;
-            } else if (tab[tab.length-1][0].equals(" ")) {
-                tab[tab.length-1][0] = val;
+            if (tab[0][0].equals(Figures.EMPTY)) {
+                tab[0][0] = figure;
+            } else if (tab[tab.length-1][tab.length-1].equals(Figures.EMPTY)) {
+                tab[tab.length-1][tab.length-1] = figure;
+            } else if (tab[0][tab.length-1].equals(Figures.EMPTY)) {
+                tab[0][tab.length-1] = figure;
+            } else if (tab[tab.length-1][0].equals(Figures.EMPTY)) {
+                tab[tab.length-1][0] = figure;
             }
         } else {
                 for (int i = 0; i < tab.length; i++) {
                     for (int j = 0; j < tab[i].length; j++) {
-                        if (tab[i][j].equals(" ")) {
-                                tab[i][j] = val;
+                        if (tab[i][j].equals(Figures.EMPTY)) {
+                                tab[i][j] = figure;
                                 this.checkEnd();
                                 if (this.gameOver) {
                                     this.gameOver = false;
                                     return;
                                 } else {
-                                    tab[i][j] = " ";
+                                    tab[i][j] = Figures.EMPTY;
                                 }
-                                tab[i][j] = val.equals("X") ? "O" : "X";
-// napis w linii powyżej można przetłumaczyć jako "Jeśli val to krzyżyk, to do zmiennej przypisz kółko, w przeciwnym przypadku przypisz krzyżyk
+                                tab[i][j] = figure.equals(Figures.CROSS) ? Figures.CIRCLE : Figures.CROSS;
+// napis w linii powyżej można przetłumaczyć jako "Jeśli figure to krzyżyk, to do zmiennej przypisz kółko, w przeciwnym przypadku przypisz krzyżyk
 // taka konstrukcja nazywa się "Ternary operator"
 /*
 Można go zapisać także w ten sposób jak poniżej:
-if (val.equals("X")){
+if (figure.equals("X")){
 tab[i][j] = "O";
 }else {
 tab[i][j] = "X";
@@ -115,11 +118,11 @@ tab[i][j] = "X";
 //Zadanie domowe ->>> jak to zrobić, żeby użytkownik miał wybór, czy gra kółkiem czy krzyżykiem?
                                 this.checkEnd();
                                 if (this.gameOver) {
-                                    tab[i][j] = val;
+                                    tab[i][j] = figure;
                                     this.gameOver = false;
                                     return;
                                 } else {
-                                    tab[i][j] = " ";
+                                    tab[i][j] = Figures.EMPTY;
                                 }
                             }
                         }
@@ -129,8 +132,8 @@ tab[i][j] = "X";
                 Random rn = new Random();
                 int x = rn.nextInt(tab.length);
                 int y = rn.nextInt(tab.length);
-                if (tab[y][x].equals(" ")) {
-                    tab[y][x] = val;
+                if (tab[y][x].equals(Figures.EMPTY)) {
+                    tab[y][x] = figure;
                     break;
                 }
             }
@@ -166,9 +169,9 @@ tab[i][j] = "X";
     public boolean checkEndInRow(int rowNumber) {
         boolean gameOver = true;
         for (int i = 1; i < tab[rowNumber].length; i++) {
-            String current = tab[rowNumber][i];
-            String previous = tab[rowNumber][i - 1];
-            if (current.equals(" ") || !current.equals(previous)) {
+            Figures current = tab[rowNumber][i];
+            Figures previous = tab[rowNumber][i - 1];
+            if (current.equals(Figures.EMPTY) || !current.equals(previous)) {
                 gameOver = false;
                 break;
             }
@@ -179,10 +182,10 @@ tab[i][j] = "X";
     public boolean checkEndInColumn(int columnNumber) {
         boolean gameOver = true;
         for (int i = 1; i < tab.length; i++) {
-            String current = tab[i][columnNumber];
-            String previous = tab[i - 1][columnNumber];
+            Figures current = tab[i][columnNumber];
+            Figures previous = tab[i - 1][columnNumber];
 
-            if (current.equals(" ") || !current.equals(previous)) {
+            if (current.equals(Figures.EMPTY) || !current.equals(previous)) {
                 gameOver = false;
                 break;
             }
@@ -193,7 +196,7 @@ tab[i][j] = "X";
     public boolean checkEndInSlash() {
         boolean result = true;
         for (int i = 1; i < tab.length; i++) {
-            if (tab[i][i].equals(" ") || !tab[i][i].equals(tab[i - 1][i - 1])) {
+            if (tab[i][i].equals(Figures.EMPTY) || !tab[i][i].equals(tab[i - 1][i - 1])) {
                 result = false;
                 break;
             }
@@ -204,7 +207,7 @@ tab[i][j] = "X";
     public boolean checkEndInReverseSlash() {
         boolean result = true;
         for (int i = 1, j = tab.length - 2; i < tab.length && j >= 0; i++, j--) {
-            if (tab[i][j].equals(" ") || !tab[i][j].equals(tab[i - 1][j + 1])) {
+            if (tab[i][j].equals(Figures.EMPTY) || !tab[i][j].equals(tab[i - 1][j + 1])) {
                 result = false;
                 break;
             }

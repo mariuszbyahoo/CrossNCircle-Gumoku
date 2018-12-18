@@ -1,5 +1,7 @@
 package pl.budzisz.mariusz.cross_n_circle;
 
+import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+
 import java.util.Scanner;
 
 public class CrossNCircleGame {
@@ -16,12 +18,12 @@ public class CrossNCircleGame {
 
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         boolean proper = false;
-        String type = input2.nextLine();
+        Figures type = input2.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
         while (!proper) {
-            if (type.equals("O")) {
+            if (type.equals(Figures.CIRCLE)) {
                 System.out.println("Grasz kółkiem, przygotowanie planszy...");
                 proper = true;
-            } else if (type.equals("X")) {
+            } else if (type.equals(Figures.CROSS)) {
                 System.out.println("Grasz krzyżykiem, przygotowanie planszy...");
                 proper = true;
             } else {
@@ -33,10 +35,10 @@ public class CrossNCircleGame {
         while (game == true) {
             data.printTable();
             if (choice == 2){
-                if (type.equals("O")){
-                    data.moveAi("O");
+                if (type.equals(Figures.CIRCLE)){
+                    data.moveAi(Figures.CIRCLE);
                 }else {
-                    data.moveAi("X");
+                    data.moveAi(Figures.CROSS);
                 }
             }else {
                 while (!moveWasDone) {
@@ -50,18 +52,18 @@ public class CrossNCircleGame {
                 break;
             }
             if (choice == 1 || choice == 2) {
-                if (type.equals("O")){
-                    data.moveAi("X");
-                }else if(type.equals("X")){
-                    data.moveAi("O");
+                if (type.equals(Figures.CIRCLE)){
+                    data.moveAi(Figures.CROSS);
+                }else if(type.equals(Figures.CROSS)){
+                    data.moveAi(Figures.CIRCLE);
                 }
                 moveWasDone = false;
             }else{
                 while (!moveWasDone) {
-                    if (type.equals("O")){
-                        moveWasDone = data.move("X");
-                    }else if(type.equals("X")){
-                        moveWasDone = data.move("O");
+                    if (type.equals(Figures.CIRCLE)){
+                        moveWasDone = data.move(Figures.CROSS);
+                    }else if(type.equals(Figures.CROSS)){
+                        moveWasDone = data.move(Figures.CIRCLE);
                     }
                     data.printTable();
                 }

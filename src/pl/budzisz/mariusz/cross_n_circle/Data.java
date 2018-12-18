@@ -17,6 +17,10 @@ public class Data {
         initTable();
     }
 
+    public Figures[][] getTab (){
+        return this.tab;
+    }
+
 
     public void initTable() {
         for (int i = 0; i < tab.length; i++) {

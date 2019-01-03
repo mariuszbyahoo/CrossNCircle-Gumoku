@@ -1,6 +1,7 @@
 package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+import pl.budzisz.mariusz.cross_n_circle.players.Player;
 import pl.budzisz.mariusz.cross_n_circle.players.PlayerAI;
 import pl.budzisz.mariusz.cross_n_circle.players.PlayerHuman;
 
@@ -18,13 +19,14 @@ public class CrossNCircleGame {
 
         Data data = new Data(input.nextInt());
 
-        PlayerAI ai;
+        Player playerA;
+        Player playerB;
 
-        PlayerHuman human;
 
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         boolean proper = false;
         Figures type = input2.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
+
         while (!proper) {
             if (type.equals(Figures.CIRCLE)) {
                 System.out.println("Grasz kółkiem, przygotowanie planszy...");
@@ -37,36 +39,41 @@ public class CrossNCircleGame {
                 proper = false;
             }
         }
-
-        if (type.equals(Figures.CROSS)) {
-            human = new PlayerHuman(Figures.CROSS, data);
+        if (choice == 1) {
+            playerA = new PlayerHuman(type, data);
+            if (type.equals(Figures.CROSS)) {
+                playerB = new PlayerAI(Figures.CIRCLE, data);
+            } else {
+                playerB = new PlayerAI(Figures.CROSS, data);
+            }
+        } else if (choice == 2) {
+            playerA = new PlayerAI(type, data);
+            if (type.equals(Figures.CROSS)) {
+                playerB = new PlayerAI(Figures.CIRCLE, data);
+            } else {
+                playerB = new PlayerAI(Figures.CROSS, data);
+            }
         } else {
-            human = new PlayerHuman(Figures.CIRCLE, data);
+            playerA = new PlayerHuman(type, data);
+            if (type.equals(Figures.CROSS)) {
+                playerB = new PlayerHuman(Figures.CIRCLE, data);
+            } else {
+                playerB = new PlayerHuman(Figures.CROSS, data);
+            }
         }
 
-        if (type.equals(Figures.CROSS)) {
-            ai = new PlayerAI(Figures.CIRCLE, data);
-        } else {
-            ai = new PlayerAI(Figures.CROSS, data);
-        }
+
+
+        data.printTable();
 
         while (game) {
+            playerA.move();
             data.printTable();
-            if (choice == 2) {
-                ai.move();
-            } else {
-                human.move();
-            }
             data.checkEnd();
             if (data.gameOver) {
                 break;
             }
-            if (choice == 1 || choice == 2) {
-                ai.move();
-            } else {
-                human.move();
-                data.printTable();
-            }
+            playerB.move();
             data.printTable();
             data.checkEnd();
             Data.round++;

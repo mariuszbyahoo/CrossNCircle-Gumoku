@@ -50,7 +50,7 @@ public class CrossNCircleGame {
             ai = new PlayerAI(Figures.CROSS, data);
         }
 
-        while (game == true) {
+        while (game) {
             data.printTable();
             if (choice == 2) {
                 ai.move();

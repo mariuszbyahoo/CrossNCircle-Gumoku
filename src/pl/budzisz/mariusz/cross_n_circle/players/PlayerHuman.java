@@ -19,15 +19,18 @@ public class PlayerHuman extends Player {
     @Override
     public void move() {
         boolean correct = false;
-        System.out.println("Oś X: ");
-        x = input.nextInt();
-        System.out.println("Oś Y: ");
-        y = input.nextInt();
-        if (correct = false) {
-            System.out.println("Zly ruch! ");
-        } else {
-
-            data.tab[y][x] = figure;
+        while(!correct) {
+            System.out.println("Oś X: ");
+            x = input.nextInt() - 1;
+            System.out.println("Oś Y: ");
+            y = input.nextInt() - 1;
+            if (!data.tab[y][x].equals(Figures.EMPTY)) {
+                System.out.println("Zly ruch! ");
+                correct = false;
+            } else {
+                data.tab[y][x] = figure;
+                correct = true;
+            }
         }
     }
 }

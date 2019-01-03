@@ -85,65 +85,6 @@ public class Data {
         return result;
     }
 
-    public void moveAi(Figures figure) {
-        if (round == 1) {
-            if (tab[0][0].equals(Figures.EMPTY)) {
-                tab[0][0] = figure;
-            } else if (tab[tab.length-1][tab.length-1].equals(Figures.EMPTY)) {
-                tab[tab.length-1][tab.length-1] = figure;
-            } else if (tab[0][tab.length-1].equals(Figures.EMPTY)) {
-                tab[0][tab.length-1] = figure;
-            } else if (tab[tab.length-1][0].equals(Figures.EMPTY)) {
-                tab[tab.length-1][0] = figure;
-            }
-        } else {
-                for (int i = 0; i < tab.length; i++) {
-                    for (int j = 0; j < tab[i].length; j++) {
-                        if (tab[i][j].equals(Figures.EMPTY)) {
-                                tab[i][j] = figure;
-                                this.checkEnd();
-                                if (this.gameOver) {
-                                    this.gameOver = false;
-                                    return;
-                                } else {
-                                    tab[i][j] = Figures.EMPTY;
-                                }
-                                tab[i][j] = figure.equals(Figures.CROSS) ? Figures.CIRCLE : Figures.CROSS;
-// napis w linii powyżej można przetłumaczyć jako "Jeśli figure to krzyżyk, to do zmiennej przypisz kółko, w przeciwnym przypadku przypisz krzyżyk
-// taka konstrukcja nazywa się "Ternary operator"
-/*
-Można go zapisać także w ten sposób jak poniżej:
-if (figure.equals("X")){
-tab[i][j] = "O";
-}else {
-tab[i][j] = "X";
-}
-*/
-//Zadanie domowe ->>> jak to zrobić, żeby użytkownik miał wybór, czy gra kółkiem czy krzyżykiem?
-                                this.checkEnd();
-                                if (this.gameOver) {
-                                    tab[i][j] = figure;
-                                    this.gameOver = false;
-                                    return;
-                                } else {
-                                    tab[i][j] = Figures.EMPTY;
-                                }
-                            }
-                        }
-                    }
-
-            while (true){
-                Random rn = new Random();
-                int x = rn.nextInt(tab.length);
-                int y = rn.nextInt(tab.length);
-                if (tab[y][x].equals(Figures.EMPTY)) {
-                    tab[y][x] = figure;
-                    break;
-                }
-            }
-        }
-    }
-
     public void checkEnd() {
         this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();
     }

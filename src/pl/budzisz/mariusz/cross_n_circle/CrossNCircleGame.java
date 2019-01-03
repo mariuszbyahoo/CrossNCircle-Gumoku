@@ -1,6 +1,7 @@
 package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+import pl.budzisz.mariusz.cross_n_circle.players.PlayerAI;
 
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ public class CrossNCircleGame {
         int choice = input.nextInt();
 
         System.out.println("Jak duża plansza?");
+
         Data data = new Data(input.nextInt());
 
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
@@ -33,13 +35,15 @@ public class CrossNCircleGame {
         }
 
         while (game == true) {
+            PlayerAI ai;
+            if( type.equals(Figures.CROSS)) {
+                ai = new PlayerAI(Figures.CIRCLE , data);
+            }else{
+                ai = new PlayerAI(Figures.CROSS , data);
+            }
             data.printTable();
             if (choice == 2){
-                if (type.equals(Figures.CIRCLE)){
-                    data.moveAi(Figures.CIRCLE);
-                }else {
-                    data.moveAi(Figures.CROSS);
-                }
+                    ai.move();
             }else {
                 while (!moveWasDone) {
                     moveWasDone = data.move(type);
@@ -53,9 +57,9 @@ public class CrossNCircleGame {
             }
             if (choice == 1 || choice == 2) {
                 if (type.equals(Figures.CIRCLE)){
-                    data.moveAi(Figures.CROSS);
+                    ai.move();
                 }else if(type.equals(Figures.CROSS)){
-                    data.moveAi(Figures.CIRCLE);
+                    ai.move();
                 }
                 moveWasDone = false;
             }else{

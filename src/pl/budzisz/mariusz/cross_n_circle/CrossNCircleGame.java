@@ -33,21 +33,8 @@ public class CrossNCircleGame {
         Data data = new Data(input.nextInt());
 
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
-        boolean proper = false;
         Figures type = input2.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
-        while (!proper) {
-            if (type.equals(Figures.CIRCLE)) {
-                System.out.println("Grasz kółkiem, przygotowanie planszy...");
-                proper = true;
-            } else if (type.equals(Figures.CROSS)) {
-                System.out.println("Grasz krzyżykiem, przygotowanie planszy...");
-                proper = true;
-            } else {
-                System.out.println("Zła komenda, podaj jedną WIELKĄ literę; O lub X");
-                proper = false;
-            }
-        }
         if (choice == 1) {
             playerA = new PlayerHuman(type, data);
             if (type.equals(Figures.CROSS)) {

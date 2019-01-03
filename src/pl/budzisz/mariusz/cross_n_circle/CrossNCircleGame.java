@@ -8,6 +8,19 @@ import pl.budzisz.mariusz.cross_n_circle.players.PlayerHuman;
 import java.util.Scanner;
 
 public class CrossNCircleGame {
+    static Player playerA;
+    static Player playerB;
+    static Player activePlayer;
+
+    static void nextRound(){
+        if(Data.round % 2 == 0){
+            activePlayer = playerA;
+        }else{
+            activePlayer = playerB;
+        }
+        Data.round++;
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
@@ -18,10 +31,6 @@ public class CrossNCircleGame {
         System.out.println("Jak duża plansza?");
 
         Data data = new Data(input.nextInt());
-
-        Player playerA;
-        Player playerB;
-
 
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         boolean proper = false;
@@ -65,21 +74,15 @@ public class CrossNCircleGame {
 
 
         data.printTable();
-
+        activePlayer = playerA;
         while (game) {
-            playerA.move();
+            activePlayer.move();
             data.printTable();
             data.checkEnd();
             if (data.gameOver) {
                 break;
             }
-            playerB.move();
-            data.printTable();
-            data.checkEnd();
-            Data.round++;
-            if (data.gameOver) {
-                break;
-            }
+            nextRound();
         }
     }
 }

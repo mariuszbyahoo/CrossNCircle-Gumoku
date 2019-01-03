@@ -2,8 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.players.Player;
-import pl.budzisz.mariusz.cross_n_circle.players.PlayerAI;
-import pl.budzisz.mariusz.cross_n_circle.players.PlayerHuman;
+import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
 
 import java.util.Scanner;
 
@@ -36,29 +35,15 @@ public class CrossNCircleGame {
         Figures type = input2.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
         if (choice == 1) {
-            playerA = new PlayerHuman(type, data);
-            if (type.equals(Figures.CROSS)) {
-                playerB = new PlayerAI(Figures.CIRCLE, data);
-            } else {
-                playerB = new PlayerAI(Figures.CROSS, data);
-            }
+            playerA = PlayerFactory.getHumanInstance(type,data);
+            playerB = PlayerFactory.getOpponentAiInstance(type,data);
         } else if (choice == 2) {
-            playerA = new PlayerAI(type, data);
-            if (type.equals(Figures.CROSS)) {
-                playerB = new PlayerAI(Figures.CIRCLE, data);
-            } else {
-                playerB = new PlayerAI(Figures.CROSS, data);
-            }
+            playerA = PlayerFactory.getAiInstance(type, data);
+            playerB = PlayerFactory.getOpponentAiInstance(type,data);
         } else {
-            playerA = new PlayerHuman(type, data);
-            if (type.equals(Figures.CROSS)) {
-                playerB = new PlayerHuman(Figures.CIRCLE, data);
-            } else {
-                playerB = new PlayerHuman(Figures.CROSS, data);
-            }
+            playerA = PlayerFactory.getHumanInstance(type,data);
+            playerB = PlayerFactory.getOpponentHumanInstance(type,data);
         }
-
-
 
         data.printTable();
         activePlayer = playerA;

@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.players.PlayerAI;
+import pl.budzisz.mariusz.cross_n_circle.players.PlayerHuman;
 
 import java.util.Scanner;
 
@@ -10,13 +11,16 @@ public class CrossNCircleGame {
         Scanner input = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         boolean game = true;
-        boolean moveWasDone = false;
         System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło \n2-> komputer kontra komputer");
         int choice = input.nextInt();
 
         System.out.println("Jak duża plansza?");
 
         Data data = new Data(input.nextInt());
+
+        PlayerAI ai;
+
+        PlayerHuman human;
 
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         boolean proper = false;
@@ -34,49 +38,39 @@ public class CrossNCircleGame {
             }
         }
 
+        if (type.equals(Figures.CROSS)) {
+            human = new PlayerHuman(Figures.CROSS, data);
+        } else {
+            human = new PlayerHuman(Figures.CIRCLE, data);
+        }
+
+        if (type.equals(Figures.CROSS)) {
+            ai = new PlayerAI(Figures.CIRCLE, data);
+        } else {
+            ai = new PlayerAI(Figures.CROSS, data);
+        }
+
         while (game == true) {
-            PlayerAI ai;
-            if( type.equals(Figures.CROSS)) {
-                ai = new PlayerAI(Figures.CIRCLE , data);
-            }else{
-                ai = new PlayerAI(Figures.CROSS , data);
-            }
             data.printTable();
-            if (choice == 2){
-                    ai.move();
-            }else {
-                while (!moveWasDone) {
-                    moveWasDone = data.move(type);
-                    data.printTable();
-                }
+            if (choice == 2) {
+                ai.move();
+            } else {
+                human.move();
             }
-            moveWasDone = false;
             data.checkEnd();
-            if (data.gameOver == true) {
+            if (data.gameOver) {
                 break;
             }
             if (choice == 1 || choice == 2) {
-                if (type.equals(Figures.CIRCLE)){
-                    ai.move();
-                }else if(type.equals(Figures.CROSS)){
-                    ai.move();
-                }
-                moveWasDone = false;
-            }else{
-                while (!moveWasDone) {
-                    if (type.equals(Figures.CIRCLE)){
-                        moveWasDone = data.move(Figures.CROSS);
-                    }else if(type.equals(Figures.CROSS)){
-                        moveWasDone = data.move(Figures.CIRCLE);
-                    }
-                    data.printTable();
-                }
-                moveWasDone = false;
+                ai.move();
+            } else {
+                human.move();
+                data.printTable();
             }
             data.printTable();
             data.checkEnd();
             Data.round++;
-            if (data.gameOver == true) {
+            if (data.gameOver) {
                 break;
             }
         }

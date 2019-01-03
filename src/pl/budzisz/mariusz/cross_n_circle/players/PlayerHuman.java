@@ -12,17 +12,22 @@ public class PlayerHuman extends Player {
     private int x;
     private int y;
 
-    public PlayerHuman (Figures figure , Data data){
-        super (figure, data);
+    public PlayerHuman(Figures figure, Data data) {
+        super(figure, data);
     }
 
     @Override
-    public void move(){
+    public void move() {
+        boolean correct = false;
         System.out.println("Oś X: ");
         x = input.nextInt();
         System.out.println("Oś Y: ");
         y = input.nextInt();
+        if (correct = false) {
+            System.out.println("Zly ruch! ");
+        } else {
 
-        data.tab[y][x] = figure;
+            data.tab[y][x] = figure;
+        }
     }
 }

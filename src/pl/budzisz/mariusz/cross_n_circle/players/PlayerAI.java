@@ -16,28 +16,28 @@ public class PlayerAI extends Player {
     @Override
     public void move(){
         if (round == 1) {
-            if (Data.tab[0][0].equals(Figures.EMPTY)) {
-                Data.tab[0][0] = figure;
-            } else if (Data.tab[Data.tab.length-1][Data.tab.length-1].equals(Figures.EMPTY)) {
-                Data.tab[Data.tab.length-1][Data.tab.length-1] = figure;
-            } else if (Data.tab[0][Data.tab.length-1].equals(Figures.EMPTY)) {
-                Data.tab[0][Data.tab.length-1] = figure;
-            } else if (Data.tab[Data.tab.length-1][0].equals(Figures.EMPTY)) {
-                Data.tab[Data.tab.length-1][0] = figure;
+            if (data.tab[0][0].equals(Figures.EMPTY)) {
+                data.tab[0][0] = figure;
+            } else if (data.tab[data.tab.length-1][data.tab.length-1].equals(Figures.EMPTY)) {
+                data.tab[data.tab.length-1][data.tab.length-1] = figure;
+            } else if (data.tab[0][data.tab.length-1].equals(Figures.EMPTY)) {
+                data.tab[0][data.tab.length-1] = figure;
+            } else if (data.tab[data.tab.length-1][0].equals(Figures.EMPTY)) {
+                data.tab[data.tab.length-1][0] = figure;
             }
         } else {
-            for (int i = 0; i < Data.tab.length; i++) {
-                for (int j = 0; j < Data.tab[i].length; j++) {
-                    if (Data.tab[i][j].equals(Figures.EMPTY)) {
-                        Data.tab[i][j] = figure;
+            for (int i = 0; i < data.tab.length; i++) {
+                for (int j = 0; j < data.tab[i].length; j++) {
+                    if (data.tab[i][j].equals(Figures.EMPTY)) {
+                        data.tab[i][j] = figure;
                         this.data.checkEnd();
                         if (this.data.gameOver) {
                             this.data.gameOver = false;
                             return;
                         } else {
-                            Data.tab[i][j] = Figures.EMPTY;
+                            data.tab[i][j] = Figures.EMPTY;
                         }
-                        Data.tab[i][j] = figure.equals(Figures.CROSS) ? Figures.CIRCLE : Figures.CROSS;
+                        data.tab[i][j] = figure.equals(Figures.CROSS) ? Figures.CIRCLE : Figures.CROSS;
 // napis w linii powyżej można przetłumaczyć jako "Jeśli figure to krzyżyk, to do zmiennej przypisz kółko, w przeciwnym przypadku przypisz krzyżyk
 // taka konstrukcja nazywa się "Ternary operator"
 /*
@@ -51,11 +51,11 @@ tab[i][j] = "X";
 //Zadanie domowe ->>> jak to zrobić, żeby użytkownik miał wybór, czy gra kółkiem czy krzyżykiem?
                         this.data.checkEnd();
                         if (this.data.gameOver) {
-                            Data.tab[i][j] = figure;
+                            data.tab[i][j] = figure;
                             this.data.gameOver = false;
                             return;
                         } else {
-                            Data.tab[i][j] = Figures.EMPTY;
+                            data.tab[i][j] = Figures.EMPTY;
                         }
                     }
                 }
@@ -63,10 +63,10 @@ tab[i][j] = "X";
 
             while (true){
                 Random rn = new Random();
-                int x = rn.nextInt(Data.tab.length);
-                int y = rn.nextInt(Data.tab.length);
-                if (Data.tab[y][x].equals(Figures.EMPTY)) {
-                    Data.tab[y][x] = figure;
+                int x = rn.nextInt(data.tab.length);
+                int y = rn.nextInt(data.tab.length);
+                if (data.tab[y][x].equals(Figures.EMPTY)) {
+                    data.tab[y][x] = figure;
                     break;
                 }
             }

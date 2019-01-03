@@ -9,9 +9,6 @@ public class PlayerHuman extends Player {
 
     private Scanner input = new Scanner(System.in);
 
-    private int x;
-    private int y;
-
     public PlayerHuman(Figures figure, Data data) {
         super(figure, data);
     }
@@ -21,9 +18,9 @@ public class PlayerHuman extends Player {
         boolean correct = false;
         while(!correct) {
             System.out.println("Oś X: ");
-            x = input.nextInt() - 1;
+            int x = input.nextInt() - 1;
             System.out.println("Oś Y: ");
-            y = input.nextInt() - 1;
+            int y = input.nextInt() - 1;
             if (!data.tab[y][x].equals(Figures.EMPTY)) {
                 System.out.println("Zly ruch! ");
                 correct = false;

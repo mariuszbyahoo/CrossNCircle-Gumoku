@@ -2,7 +2,6 @@ package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class Data {
@@ -10,7 +9,7 @@ public class Data {
     private int x;
 
     private int command;
-    public static Figures[][] tab;
+    public Figures[][] tab;
 
     public Data(int x) {
         tab = new Figures[x][x];

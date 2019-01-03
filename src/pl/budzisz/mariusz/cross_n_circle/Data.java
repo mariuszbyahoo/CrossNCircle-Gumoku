@@ -10,7 +10,7 @@ public class Data {
     private int x;
 
     private int command;
-    private Figures[][] tab;
+    public static Figures[][] tab;
 
     public Data(int x) {
         tab = new Figures[x][x];

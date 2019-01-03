@@ -30,9 +30,9 @@ public class PlayerAI extends Player {
                 for (int j = 0; j < Data.tab[i].length; j++) {
                     if (Data.tab[i][j].equals(Figures.EMPTY)) {
                         Data.tab[i][j] = figure;
-                        this.checkEnd();
-                        if (this.gameOver) {
-                            this.gameOver = false;
+                        this.data.checkEnd();
+                        if (this.data.gameOver) {
+                            this.data.gameOver = false;
                             return;
                         } else {
                             Data.tab[i][j] = Figures.EMPTY;
@@ -49,10 +49,10 @@ tab[i][j] = "X";
 }
 */
 //Zadanie domowe ->>> jak to zrobić, żeby użytkownik miał wybór, czy gra kółkiem czy krzyżykiem?
-                        this.checkEnd();
-                        if (this.gameOver) {
+                        this.data.checkEnd();
+                        if (this.data.gameOver) {
                             Data.tab[i][j] = figure;
-                            this.gameOver = false;
+                            this.data.gameOver = false;
                             return;
                         } else {
                             Data.tab[i][j] = Figures.EMPTY;
@@ -71,6 +71,5 @@ tab[i][j] = "X";
                 }
             }
         }
-    }
     }
 }

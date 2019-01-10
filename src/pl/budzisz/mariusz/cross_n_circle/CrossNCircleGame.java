@@ -7,11 +7,11 @@ import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
 import java.util.Scanner;
 
 public class CrossNCircleGame {
-    static Player playerA;
-    static Player playerB;
-    static Player activePlayer;
+    Player playerA;
+    Player playerB;
+    Player activePlayer;
 
-    static void nextRound(){
+    void nextRound(){
         if(Data.round % 2 == 0){
             activePlayer = playerA;
         }else{
@@ -20,19 +20,14 @@ public class CrossNCircleGame {
         Data.round++;
     }
 
-    public static void main(String[] args) {
+    public void startGame(Data data){
         Scanner input = new Scanner(System.in);
-        Scanner input2 = new Scanner(System.in);
-        boolean game = true;
         System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło \n2-> komputer kontra komputer");
         int choice = input.nextInt();
-
-        System.out.println("Jak duża plansza?");
-
-        Data data = new Data(input.nextInt());
+        input.nextLine();
 
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
-        Figures type = input2.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
+        Figures type = input.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
         if (choice == 1) {
             playerA = PlayerFactory.getHumanInstance(type,data);
@@ -44,7 +39,10 @@ public class CrossNCircleGame {
             playerA = PlayerFactory.getHumanInstance(type,data);
             playerB = PlayerFactory.getOpponentHumanInstance(type,data);
         }
+    }
 
+    public void play(Data data){
+        boolean game = true;
         data.printTable();
         activePlayer = playerA;
         while (game) {
@@ -56,5 +54,14 @@ public class CrossNCircleGame {
             }
             nextRound();
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Jak duża plansza?");
+        Scanner input = new Scanner(System.in);
+        Data data = new Data(input.nextInt());
+        CrossNCircleGame cross = new CrossNCircleGame();
+        cross.startGame(data);
+        cross.play(data);
     }
 }

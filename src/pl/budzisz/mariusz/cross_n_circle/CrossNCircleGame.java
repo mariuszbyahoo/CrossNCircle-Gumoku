@@ -22,11 +22,7 @@ public class CrossNCircleGame {
             Scanner input = new Scanner(System.in);
             System.out.println("1 ->Grasz w Kolko i Krzyzyk\n2 ->Grasz w Gumoku");
             choice = input.nextInt();
-            if (choice == Rules.CLASSIC.ordinal()) {
-                gameRules = RulesFactory.getClassicRules(data);
-            } else if (choice == Rules.GOMOKU.ordinal()) {
-                gameRules = RulesFactory.getGumokuRules(data);
-            }
+            gameRules = RulesFactory.getRules(choice , data);
         } else {
             gameRules = RulesFactory.getClassicRules(data);
         }

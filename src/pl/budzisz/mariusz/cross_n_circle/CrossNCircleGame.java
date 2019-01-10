@@ -29,10 +29,10 @@ public class CrossNCircleGame {
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         Figures type = input.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
-        if (choice == 1) {
+        if (choice == Choice.AIOPPONENT.ordinal()) {
             playerA = PlayerFactory.getHumanInstance(type,data);
             playerB = PlayerFactory.getOpponentAiInstance(type,data);
-        } else if (choice == 2) {
+        } else if (choice == Choice.HUMANOPPONENT.ordinal()) {
             playerA = PlayerFactory.getAiInstance(type, data);
             playerB = PlayerFactory.getOpponentAiInstance(type,data);
         } else {

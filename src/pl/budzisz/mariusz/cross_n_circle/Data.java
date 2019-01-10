@@ -2,8 +2,6 @@ package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
-import java.util.Scanner;
-
 public class Data {
     public static int round = 1;
     private int x;
@@ -14,10 +12,6 @@ public class Data {
     public Data(int x) {
         tab = new Figures[x][x];
         initTable();
-    }
-
-    public Figures[][] getTab (){
-        return this.tab;
     }
 
 
@@ -50,38 +44,6 @@ public class Data {
             }
             System.out.println("|");
         }
-    }
-
-    public boolean move(Figures figure) {
-        int y = 0;
-        int x = 0;
-        Scanner input = new Scanner(System.in);
-        command = input.nextInt();
-        boolean result = true;
-
-        if (command >= 1 && command <= tab.length) {
-            x = command - 1;
-            command = input.nextInt();
-            if (command >= 1 && command <= tab.length) {
-                y = command - 1;
-            } else {
-                System.out.println("Niepoprawny ruch");
-                result = false;
-            }
-        } else {
-            System.out.println("Niepoprawny ruch");
-            result = false;
-        }
-
-
-        if (!tab[y][x].equals(Figures.EMPTY)) {
-            System.out.println("Pole zajęte, spróbuj jeszcze raz");
-            result = false;
-        } else {
-            tab[y][x] = figure;
-
-        }
-        return result;
     }
 
     public void checkEnd() {

@@ -22,7 +22,7 @@ public class CrossNCircleGame {
 
     int choice;
 
-    void selectRules(Data data) {
+    private void selectRules(Data data) {
         if (data.tab.length >= 10) {
             Scanner input = new Scanner(System.in);
             System.out.println("1 ->Grasz w Kolko i Krzyzyk\n2 ->Grasz w Gumoku");
@@ -33,7 +33,7 @@ public class CrossNCircleGame {
         }
     }
 
-    void nextRound(){
+    private void nextRound(){
         if(Data.round % 2 == 0){
             activePlayer = playerA;
         }else{
@@ -42,7 +42,7 @@ public class CrossNCircleGame {
         Data.round++;
     }
 
-    public void startGame(Data data){
+    private void startGame(Data data){
         selectRules(data);
         Scanner input = new Scanner(System.in);
         System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło \n2-> komputer kontra komputer");
@@ -72,7 +72,7 @@ public class CrossNCircleGame {
         }
     }
 
-    public void play(Data data){
+    private void play(Data data){
         boolean game = true;
         data.printTable();
         activePlayer = playerA;
@@ -88,10 +88,7 @@ public class CrossNCircleGame {
     }
 
     public static void main(String[] args) {
-        System.out.println("Jak duża plansza?");
-        Scanner input = new Scanner(System.in);
-        int size = input.nextInt();
-        Data data = new Data(size);
+        Data data = new Data();
         CrossNCircleGame cross = new CrossNCircleGame();
         cross.startGame(data);
         cross.play(data);

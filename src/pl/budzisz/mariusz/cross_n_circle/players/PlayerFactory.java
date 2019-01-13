@@ -6,7 +6,6 @@ import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 public class PlayerFactory {
 
     public static Player getInstance(Figures type, Data data, boolean isOpponent, boolean isHuman){
-        Player player;
         if(isOpponent){
             if (isHuman){
                 return getOpponentHumanInstance(type , data);

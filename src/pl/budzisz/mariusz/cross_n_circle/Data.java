@@ -2,11 +2,16 @@ package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
+import java.util.Scanner;
+
 public class Data {
     public static int round = 1;
     public Figures[][] tab;
 
-    public Data(int x) {
+    public Data() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Jak duża plansza?");
+        int x = input.nextInt();
         tab = new Figures[x][x];
         initTable();
     }

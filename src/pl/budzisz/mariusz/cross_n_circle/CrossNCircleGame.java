@@ -61,10 +61,12 @@ public class CrossNCircleGame {
 
             playerA = PlayerFactory.getInstance(type , data , false , true);
             playerB = PlayerFactory.getInstance(type , data , true , false);
+
         } else if (choice == Choice.AIVSAI.ordinal()) {
 
             playerA = PlayerFactory.getInstance(type, data , false , false);
             playerB = PlayerFactory.getInstance(type,data , true , false);
+
         } else {
 
             playerA = PlayerFactory.getInstance(type,data , false , true);

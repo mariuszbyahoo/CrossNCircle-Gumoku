@@ -1,7 +1,6 @@
 package pl.budzisz.mariusz.cross_n_circle.game_modes;
 
 import pl.budzisz.mariusz.cross_n_circle.Data;
-import pl.budzisz.mariusz.cross_n_circle.Rules;
 
 public class RulesFactory {
 

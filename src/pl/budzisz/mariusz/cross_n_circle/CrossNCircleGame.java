@@ -3,10 +3,15 @@ package pl.budzisz.mariusz.cross_n_circle;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.RulesFactory;
+import pl.budzisz.mariusz.cross_n_circle.players.Choice;
 import pl.budzisz.mariusz.cross_n_circle.players.Player;
 import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
 
 import java.util.Scanner;
+
+/**
+ * Praca domowa to refactoring linii 54-69 do postaci w jakiej jest 28-32.
+ */
 
 public class CrossNCircleGame {
     Player playerA;
@@ -47,15 +52,23 @@ public class CrossNCircleGame {
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         Figures type = input.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
+        /**
+         * Wyglada na to, że trzeba logikę odpowiedzialną za wybór konkretnej instancji playerów zawrzeć w konkretnej metodzie w klasie
+         * PlayerFactory!
+         */
+
         if (choice == Choice.AIOPPONENT.ordinal()) {
-            playerA = PlayerFactory.getHumanInstance(type,data);
-            playerB = PlayerFactory.getOpponentAiInstance(type,data);
-        } else if (choice == Choice.HUMANOPPONENT.ordinal()) {
-            playerA = PlayerFactory.getAiInstance(type, data);
-            playerB = PlayerFactory.getOpponentAiInstance(type,data);
+
+            playerA = PlayerFactory.getInstance(type , data , false , true);
+            playerB = PlayerFactory.getInstance(type , data , true , false);
+        } else if (choice == Choice.AIVSAI.ordinal()) {
+
+            playerA = PlayerFactory.getInstance(type, data , false , false);
+            playerB = PlayerFactory.getInstance(type,data , true , false);
         } else {
-            playerA = PlayerFactory.getHumanInstance(type,data);
-            playerB = PlayerFactory.getOpponentHumanInstance(type,data);
+
+            playerA = PlayerFactory.getInstance(type,data , false , true);
+            playerB = PlayerFactory.getInstance(type,data , true , true);
         }
     }
 

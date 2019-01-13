@@ -1,4 +1,4 @@
-package pl.budzisz.mariusz.cross_n_circle;
+package pl.budzisz.mariusz.cross_n_circle.game_modes;
 
 public enum Rules {
     NULL,

@@ -13,5 +13,4 @@ public abstract class GameRules {
     }
 
     abstract public void checkEnd();
-
 }

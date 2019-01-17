@@ -28,9 +28,12 @@ public class Data {
     public boolean gameOver = false;
 
     public void printTable() {
-        System.out.print(" ");
+        System.out.print("  ");
         for (int i = 0; i < tab.length; i++) {
             System.out.print(" " + (i + 1));
+            if ( i < 9){
+                System.out.print(" ");
+            }
         }
         System.out.println();
         // dla obsłużenia tablicy dwuwymiarowej, żeby była dalej zachowana możliwość rozszerzania tablicy w obydwu wymiarach
@@ -41,8 +44,11 @@ public class Data {
 
         for (int i = 0; i < tab.length; i++) {
             System.out.print(i + 1);
+            if (i < 9){
+                System.out.print(" ");
+            }
             for (int j = 0; j < tab[i].length; j++) {
-                System.out.print("|" + tab[i][j]);
+                System.out.print("| "  + tab[i][j]);
             }
             System.out.println("|");
         }

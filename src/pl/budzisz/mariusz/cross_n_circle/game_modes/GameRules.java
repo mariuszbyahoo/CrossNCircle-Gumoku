@@ -1,7 +1,6 @@
 package pl.budzisz.mariusz.cross_n_circle.game_modes;
 
 import pl.budzisz.mariusz.cross_n_circle.Data;
-import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
 public abstract class GameRules {
 
@@ -13,6 +12,6 @@ public abstract class GameRules {
         this.data = data;
     }
 
-    public void checkEnd(){}
+    abstract public void checkEnd();
 
 }

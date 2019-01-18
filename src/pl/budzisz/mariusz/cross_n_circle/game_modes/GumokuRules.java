@@ -46,4 +46,5 @@ public class GumokuRules extends GameRules {
         }
         return true;
     }
+
 }

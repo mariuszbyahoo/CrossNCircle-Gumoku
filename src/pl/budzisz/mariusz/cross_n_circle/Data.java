@@ -25,8 +25,6 @@ public class Data {
         }
     }
 
-    public boolean gameOver = false;
-
     public void printTable() {
         System.out.print("  ");
         for (int i = 0; i < tab.length; i++) {

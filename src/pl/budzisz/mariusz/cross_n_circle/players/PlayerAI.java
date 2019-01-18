@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle.players;
 
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
 
 import java.util.Random;
 
@@ -9,13 +10,15 @@ import static pl.budzisz.mariusz.cross_n_circle.Data.round;
 
 public class PlayerAI extends Player {
 
-    public PlayerAI (Figures figure , Data data) {
+    GameRules gameRules;
+    public PlayerAI (Figures figure , Data data, GameRules gameRules) {
         super(figure , data);
+        this.gameRules = gameRules;
     }
 
     @Override
     public void move(){
-        if (round == 1) {
+        if (round == 2) {
             if (data.tab[0][0].equals(Figures.EMPTY)) {
                 data.tab[0][0] = figure;
             } else if (data.tab[data.tab.length-1][data.tab.length-1].equals(Figures.EMPTY)) {
@@ -30,27 +33,19 @@ public class PlayerAI extends Player {
                 for (int j = 0; j < data.tab[i].length; j++) {
                     if (data.tab[i][j].equals(Figures.EMPTY)) {
                         data.tab[i][j] = figure;
-                        if (this.data.gameOver) {
-                            this.data.gameOver = false;
+                        gameRules.checkEnd();
+                        if (this.gameRules.gameOver) {
+                            this.gameRules.gameOver = false;
                             return;
                         } else {
                             data.tab[i][j] = Figures.EMPTY;
                         }
                         data.tab[i][j] = figure.equals(Figures.CROSS) ? Figures.CIRCLE : Figures.CROSS;
-// napis w linii powyżej można przetłumaczyć jako "Jeśli figure to krzyżyk, to do zmiennej przypisz kółko, w przeciwnym przypadku przypisz krzyżyk
-// taka konstrukcja nazywa się "Ternary operator"
-/*
-Można go zapisać także w ten sposób jak poniżej:
-if (figure.equals("X")){
-tab[i][j] = "O";
-}else {
-tab[i][j] = "X";
-}
-*/
-//Zadanie domowe ->>> jak to zrobić, żeby użytkownik miał wybór, czy gra kółkiem czy krzyżykiem?
-                        if (this.data.gameOver) {
+                        gameRules.checkEnd();
+                        if (this.gameRules.gameOver) {
                             data.tab[i][j] = figure;
-                            this.data.gameOver = false;
+                            gameRules.checkEnd();
+                            this.gameRules.gameOver = false;
                             return;
                         } else {
                             data.tab[i][j] = Figures.EMPTY;

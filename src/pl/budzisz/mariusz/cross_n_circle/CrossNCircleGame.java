@@ -60,18 +60,18 @@ public class CrossNCircleGame {
 
         if (choice == Choice.AIOPPONENT.ordinal()) {
 
-            playerA = PlayerFactory.getInstance(type , data , false , true);
-            playerB = PlayerFactory.getInstance(type , data , true , false);
+            playerA = PlayerFactory.getInstance(type , data , false , true, gameRules);
+            playerB = PlayerFactory.getInstance(type , data , true , false, gameRules);
 
         } else if (choice == Choice.AIVSAI.ordinal()) {
 
-            playerA = PlayerFactory.getInstance(type, data , false , false);
-            playerB = PlayerFactory.getInstance(type,data , true , false);
+            playerA = PlayerFactory.getInstance(type, data , false , false, gameRules);
+            playerB = PlayerFactory.getInstance(type,data , true , false, gameRules);
 
         } else {
 
-            playerA = PlayerFactory.getInstance(type,data , false , true);
-            playerB = PlayerFactory.getInstance(type,data , true , true);
+            playerA = PlayerFactory.getInstance(type,data , false , true, gameRules);
+            playerB = PlayerFactory.getInstance(type,data , true , true, gameRules);
         }
     }
 

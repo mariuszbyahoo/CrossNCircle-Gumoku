@@ -10,7 +10,8 @@ import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
 import java.util.Scanner;
 
 /**
- * Praca domowa to refactoring linii 54-69 do postaci w jakiej jest 28-32.
+ * Praca domowa dopracować algorytm by komputer gral w Gumoku.
+ * W pierwszej kolejnosci zrob tak by przeszkadzal graczowi czy.
  */
 
 public class CrossNCircleGame {

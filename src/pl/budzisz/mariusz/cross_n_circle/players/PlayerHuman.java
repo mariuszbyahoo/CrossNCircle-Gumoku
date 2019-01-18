@@ -17,15 +17,15 @@ public class PlayerHuman extends Player {
     public void move() {
         boolean correct = false;
         while(!correct) {
-            System.out.println("Oś X: ");
+            System.out.println("Wiersz numer: ");
             int x = input.nextInt() - 1;
-            System.out.println("Oś Y: ");
+            System.out.println("Kolumna numer: ");
             int y = input.nextInt() - 1;
-            if (!data.tab[y][x].equals(Figures.EMPTY)) {
+            if (!data.tab[x][y].equals(Figures.EMPTY)) {
                 System.out.println("Zly ruch! ");
                 correct = false;
             } else {
-                data.tab[y][x] = figure;
+                data.tab[x][y] = figure;
                 correct = true;
             }
         }

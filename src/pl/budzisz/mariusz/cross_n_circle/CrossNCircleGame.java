@@ -53,10 +53,6 @@ public class CrossNCircleGame {
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         Figures type = input.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
-        /**
-         * Wyglada na to, że trzeba logikę odpowiedzialną za wybór konkretnej instancji playerów zawrzeć w konkretnej metodzie w klasie
-         * PlayerFactory!
-         */
 
         if (choice == Choice.AIOPPONENT.ordinal()) {
 

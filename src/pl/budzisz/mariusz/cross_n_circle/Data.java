@@ -34,11 +34,6 @@ public class Data {
             }
         }
         System.out.println();
-        // dla obsłużenia tablicy dwuwymiarowej, żeby była dalej zachowana możliwość rozszerzania tablicy w obydwu wymiarach
-        // potrzebne jest wykonanie pętli for dla wymiaru pierwszego i zagnieździć w nim pętlę for dla wymiaru drugiego,
-        // co ciekawe pokazuje się metoda pokazująca "długość" drugiego wymiaru; tab[i].length
-        // jako że na początku pętla drukuje obydwa wymiary w jednym wierszu, potrzebne jest po zamknięciu pętli drugiego wymiaru
-        // wydrukowanie znaku nowej linii - pusty sout.
 
         for (int i = 0; i < tab.length; i++) {
             System.out.print(i + 1);

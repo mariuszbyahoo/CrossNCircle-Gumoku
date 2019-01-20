@@ -87,35 +87,44 @@ public class PlayerAI extends Player {
      * @return
      */
 
-    private  boolean checkDirection(int x, int y, Direction direction){
-        if(!data.tab[x][y].equals(Figures.EMPTY)){
-            Figures source = data.tab[x][y];
-            for(int i = 0; i<2;i++){
-                x = x + direction.getX();
-                y = y + direction.getY();
-                if(x < 0 || y < 0 || x > data.tab.length - 1 || y > data.tab.length - 1){
-                    return false;
+    private  boolean checkDirection(int x, int y, Direction direction) {
+        if (!data.tab[x][y].equals(Figures.EMPTY)) {
+            if (data.tab[x][y].equals(foesFigure)) {
+                Figures source = data.tab[x][y];
+                for (int i = 0; i < 2; i++) {
+                    x = x + direction.getX();
+                    y = y + direction.getY();
+                    if (x < 0 || y < 0 || x > data.tab.length - 1 || y > data.tab.length - 1) {
+                        return false;
+                    }
+                    if (data.tab[x][y].equals(Figures.EMPTY)) {
+                        return false;
+                    } else if (!data.tab[x][y].equals(source)) {
+                        return false;
+                    }
                 }
-                if (data.tab[x][y].equals(Figures.EMPTY)){
+                possibleX = x + direction.getX();
+                possibleY = y + direction.getY();
+                if (possibleX < 1 || possibleY < 1 || possibleX > data.tab.length - 2 || possibleY > data.tab.length - 2) {
                     return false;
-                } else if(!data.tab[x][y].equals(source)){
-                    return false;
+                } else {
+                    return true;
                 }
             }
-        } else {
-            return false;
         }
-        possibleX = x + direction.getX();
-        possibleY = y + direction.getY();
-        return true;
+    return false;
     }
 
     /**
      * No i mamy wersje, w bardzo Alpha sztucznej inteligencji gdzie komputer potrafi juz samemu kontratakowac, problemy tu sa dwa:
      * 1-> gdy kontratakuje, to wtedy nadal wstawia jeszcze jedna figure.
+     * ZROBIONE.
      * 2-> w przypadku gry w kolko i krzyzyk potrafi sie odwolac do elementu tablicy spoza jej zakresu, ArrayIndexOutOfBoundException.
+     * ZROBIONE
      * 3-> w przypadku kontrataku komputer stara sie zablokowac ruch czlowieka z kazdego kierunku, nawet jesli w tym kierunku pozostalo
      * tylko jedno wolne pole, czyt. nic to nie da jak je zajmie.
+     *
+     * AD 3 -> pozostalo naprawic prawy gorny rog! (kontratakuje dopiero, gdy pojawi sie ciag czterech znakow, nie trzech.
      */
 
     public void checkCounterAttack() {

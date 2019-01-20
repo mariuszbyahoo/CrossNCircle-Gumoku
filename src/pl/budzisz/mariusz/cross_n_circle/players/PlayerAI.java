@@ -37,6 +37,15 @@ public class PlayerAI extends Player {
                     data.tab[data.tab.length - 1][0] = figure;
                 }
             } else {
+                /** W else
+                 * zawarta jest logika postepowania komputera w przypadku podejmowania decyzji ws tego co robic dalej.
+                 * 1 -> Sprawdz czy mozesz zakonczyc gre jednym ruchem, jak nie, to przywroc puste pole w
+                 *      Gdzie to sprawdzales.(linijki 50-58 )
+                 * 2-> Jesi nie, to wtedy sprawdz, czy jak przeciwnik tam postawi figure to przegrasz
+                 *      Jesli tak, to postaw tam swoja. (linijki 59-65)
+                 * 3-> Jesli nie mozesz 1 ruchem zakonczyc gry ani nie jestes tym zagrozony ze strony przeciwnika to
+                 *      Zmien sprawdzane pole na puste. (linijki 66-68)
+                 */
                 for (int i = 0; i < data.tab.length; i++) {
                     for (int j = 0; j < data.tab[i].length; j++) {
                         if (data.tab[i][j].equals(Figures.EMPTY)) {
@@ -132,42 +141,51 @@ public class PlayerAI extends Player {
             for (int j = 0; j < data.tab.length; j++) {
                 if (checkDirection(i, j, Direction.UP)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    }else {
+                        counterAttack(possibleX, possibleY, data);
                     }
-                    counterAttack(possibleX, possibleY, data);
                 } else if (checkDirection(i, j, Direction.DOWN)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    }else {
+                        counterAttack(possibleX, possibleY, data);
                     }
-                    counterAttack(possibleX, possibleY, data);
                 } else if (checkDirection(i, j, Direction.LEFT)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    }else {
+                        counterAttack(possibleX, possibleY, data);
                     }
-                    counterAttack(possibleX, possibleY, data);
                 } else if (checkDirection(i, j, Direction.RIGHT)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    }else {
+                        counterAttack(possibleX, possibleY, data);
                     }
-                    counterAttack(possibleX, possibleY, data);
                 } else if (checkDirection(i, j, Direction.LEFT_DOWN)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    }else {
+                        counterAttack(possibleX, possibleY, data);
                     }
-                    counterAttack(possibleX, possibleY, data);
                 } else if (checkDirection(i, j, Direction.LEFT_UP)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    }else {
+                        counterAttack(possibleX, possibleY, data);
                     }
-                    counterAttack(possibleX, possibleY, data);
                 } else if (checkDirection(i, j, Direction.RIGHT_DOWN)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    }else {
+                        counterAttack(possibleX, possibleY, data);
                     }
-                    counterAttack(possibleX, possibleY, data);
                 } else if (checkDirection(i, j, Direction.RIGHT_UP)) {
                     if (counterAttacked) {
-                        break;
+                        continue;
+                    } else {
+                        counterAttack(possibleX, possibleY, data);
                     }
                 }
             }

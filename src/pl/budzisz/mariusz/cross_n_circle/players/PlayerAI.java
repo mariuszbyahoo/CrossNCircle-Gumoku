@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle.players;
 
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+import pl.budzisz.mariusz.cross_n_circle.game_modes.Direction;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
 
 import java.util.Random;
@@ -13,6 +14,7 @@ public class PlayerAI extends Player {
     GameRules gameRules;
     private int possibleX;
     private int possibleY;
+    private boolean counterAttacked = false;
 
     Figures foesFigure = figure.equals(Figures.CROSS) ? Figures.CIRCLE : Figures.CROSS;
     public PlayerAI (Figures figure , Data data, GameRules gameRules) {
@@ -22,6 +24,7 @@ public class PlayerAI extends Player {
 
     @Override
     public void move() {
+        checkCounterAttack();
         if (round == 2) {
             if (data.tab[0][0].equals(Figures.EMPTY)) {
                 data.tab[0][0] = figure;
@@ -32,11 +35,7 @@ public class PlayerAI extends Player {
             } else if (data.tab[data.tab.length - 1][0].equals(Figures.EMPTY)) {
                 data.tab[data.tab.length - 1][0] = figure;
             }
-        }else if (is3InAColumn(data)) {
-            counterAttack(possibleX, possibleY, data);
-        }else if (is3InARow(data)){
-            counterAttack(possibleX,possibleY,data);
-        }else {
+        } else {
             for (int i = 0; i < data.tab.length; i++) {
                 for (int j = 0; j < data.tab[i].length; j++) {
                     if (data.tab[i][j].equals(Figures.EMPTY)) {
@@ -62,7 +61,7 @@ public class PlayerAI extends Player {
                 }
             }
 
-            while (true){
+            while (true) {
                 Random rn = new Random();
                 int x = rn.nextInt(data.tab.length);
                 int y = rn.nextInt(data.tab.length);
@@ -73,52 +72,102 @@ public class PlayerAI extends Player {
             }
         }
     }
-    private boolean is3InAColumn(Data data) {
-        for (int y = 1; y < data.tab.length; y++) {
-            for (int x = 1; x < data.tab.length - 1; x++) {
-                if (data.tab[x][y].equals(foesFigure)) {
-                    if (data.tab[x + 1][y].equals(foesFigure)) {
-                        if (data.tab[x + 2][y].equals(foesFigure)) {
-                            if (data.tab[x - 1][y].equals(Figures.EMPTY)) {
-                                possibleX = x - 1;
-                                possibleY = y;
-                                return true;
-                            } else {
-                                possibleX = x + 3;
-                                possibleY = y;
-                                return true;
-                            }
-                        }
+
+    /**
+     * Mamy tutaj metode checkDirection() ktora ma sprawdzic czy w danym kierunku wystepuja 3 takie same znaki
+     * No i teraz potrzeba zeby ta metoda brala czwarty znak z kolei i jego wspolrzedne zapisywala do pol
+     * O nazwach possibleX i possibleY
+     * @param x
+     * @param y
+     * @param direction
+     * @return
+     */
+
+    private  boolean checkDirection(int x, int y, Direction direction){
+        if(!data.tab[x][y].equals(Figures.EMPTY)){
+            Figures source = data.tab[x][y];
+            for(int i = 0; i<2;i++){
+                x = x + direction.getX();
+                y = y + direction.getY();
+                if(x < 0 || y < 0 || x > data.tab.length - 1 || y > data.tab.length - 1){
+                    return false;
+                }
+                if (data.tab[x][y].equals(Figures.EMPTY)){
+                    return false;
+                } else if(!data.tab[x][y].equals(source)){
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        possibleX = x + direction.getX();
+        possibleY = y + direction.getY();
+        return true;
+    }
+
+    /**
+     * No i mamy wersje, w bardzo Alpha sztucznej inteligencji gdzie komputer potrafi juz samemu kontratakowac, problemy tu sa dwa:
+     * 1-> gdy kontratakuje, to wtedy nadal wstawia jeszcze jedna figure.
+     * 2-> w przypadku gry w kolko i krzyzyk potrafi sie odwolac do elementu tablicy spoza jej zakresu, ArrayIndexOutOfBoundException.
+     * 3-> w przypadku kontrataku komputer stara sie zablokowac ruch czlowieka z kazdego kierunku, nawet jesli w tym kierunku pozostalo
+     * tylko jedno wolne pole, czyt. nic to nie da jak je zajmie.
+     */
+
+    public boolean checkCounterAttack() {
+        for (int i = 0; i < data.tab.length; i++) {
+            for (int j = 0; j < data.tab.length; j++) {
+                if (checkDirection(i, j, Direction.UP)) {
+                    if (counterAttacked) {
+                        break;
+                    }
+                    counterAttack(possibleX, possibleY, data);
+                } else if (checkDirection(i, j, Direction.DOWN)) {
+                    if (counterAttacked) {
+                        break;
+                    }
+                    counterAttack(possibleX, possibleY, data);
+                } else if (checkDirection(i, j, Direction.LEFT)) {
+                    if (counterAttacked) {
+                        break;
+                    }
+                    counterAttack(possibleX, possibleY, data);
+                } else if (checkDirection(i, j, Direction.RIGHT)) {
+                    if (counterAttacked) {
+                        break;
+                    }
+                    counterAttack(possibleX, possibleY, data);
+                } else if (checkDirection(i, j, Direction.LEFT_DOWN)) {
+                    if (counterAttacked) {
+                        break;
+                    }
+                    counterAttack(possibleX, possibleY, data);
+                } else if (checkDirection(i, j, Direction.LEFT_UP)) {
+                    if (counterAttacked) {
+                        break;
+                    }
+                    counterAttack(possibleX, possibleY, data);
+                } else if (checkDirection(i, j, Direction.RIGHT_DOWN)) {
+                    if (counterAttacked) {
+                        break;
+                    }
+                    counterAttack(possibleX, possibleY, data);
+                } else if (checkDirection(i, j, Direction.RIGHT_UP)) {
+                    if (counterAttacked) {
+                        break;
                     }
                 }
             }
         }
-        return false;
+    counterAttacked = false;
+    return false;
     }
-    private boolean is3InARow(Data data) {
-        for (int y = 1; y < data.tab.length; y++) {
-            for (int x = 1; x < data.tab.length - 1; x++) {
-                if (data.tab[x][y].equals(foesFigure)) {
-                    if (data.tab[x][y + 1].equals(foesFigure)) {
-                        if (data.tab[x][y + 2].equals(foesFigure)) {
-                            if (data.tab[x][y - 1].equals(Figures.EMPTY)) {
-                                possibleX = x;
-                                possibleY = y - 1;
-                                return true;
-                            } else {
-                                possibleX = x;
-                                possibleY = y + 3;
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+
+    private void counterAttack(int possibleX, int possibleY, Data data) {
+        if(data.tab[possibleX][possibleY] == Figures.EMPTY) {
+            data.tab[possibleX][possibleY] = figure;
+            counterAttacked = true;
+            System.out.println("Komputer kontratakuje!");
         }
-        return false;
-    }
-    private void counterAttack(int possibleX , int possibleY, Data data) {
-        data.tab[possibleX][possibleY] = figure;
-        System.out.println("Komputer kontratakuje!");
     }
 }

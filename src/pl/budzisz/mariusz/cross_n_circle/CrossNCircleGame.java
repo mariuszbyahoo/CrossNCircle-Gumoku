@@ -46,7 +46,7 @@ public class CrossNCircleGame {
     private void startGame(Data data){
         selectRules(data);
         Scanner input = new Scanner(System.in);
-        System.out.println("1 -> grasz z komputerem, inna liczba - grasz na gorące krzesło \n2-> komputer kontra komputer");
+        System.out.println("1 -> grasz z komputerem,\n2-> komputer kontra komputer,\njakakolwiek inna liczba - grasz na gorące krzesło");
         int choice = input.nextInt();
         input.nextLine();
 

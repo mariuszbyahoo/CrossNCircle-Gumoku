@@ -4,9 +4,13 @@ import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
 import java.util.Scanner;
 
+
 public class Data {
     public static int round = 1;
     public Figures[][] tab;
+
+
+
 
     public Data() {
         Scanner input = new Scanner(System.in);

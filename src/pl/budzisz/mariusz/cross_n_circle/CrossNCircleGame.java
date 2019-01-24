@@ -6,6 +6,7 @@ import pl.budzisz.mariusz.cross_n_circle.game_modes.RulesFactory;
 import pl.budzisz.mariusz.cross_n_circle.players.Choice;
 import pl.budzisz.mariusz.cross_n_circle.players.Player;
 import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
+import pl.budzisz.mariusz.cross_n_circle.view.Window;
 
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class CrossNCircleGame {
     Player activePlayer;
 
     GameRules gameRules;
+    static Window window;
 
     int choice;
 
@@ -34,13 +36,14 @@ public class CrossNCircleGame {
         }
     }
 
-    private void nextRound(){
+    private void nextRound(Data data){
         if(Data.round % 2 == 0){
             activePlayer = playerA;
         }else{
             activePlayer = playerB;
         }
         Data.round++;
+        window.printTable();
     }
 
     private void startGame(Data data){
@@ -82,7 +85,7 @@ public class CrossNCircleGame {
             if (gameRules.gameOver) {
                 break;
             }
-            nextRound();
+            nextRound(data);
         }
     }
 
@@ -90,6 +93,8 @@ public class CrossNCircleGame {
         Data data = new Data();
         CrossNCircleGame cross = new CrossNCircleGame();
         cross.startGame(data);
+        window = new Window(1200,800,data);
         cross.play(data);
+
     }
 }

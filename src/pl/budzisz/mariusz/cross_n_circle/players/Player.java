@@ -5,7 +5,7 @@ import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
 public abstract class Player {
 
-    Figures figure;
+    public Figures figure;
 
     Data data;
 

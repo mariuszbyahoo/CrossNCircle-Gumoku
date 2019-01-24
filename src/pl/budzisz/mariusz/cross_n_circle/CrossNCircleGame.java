@@ -19,6 +19,7 @@ public class CrossNCircleGame {
     Player playerA;
     Player playerB;
     Player activePlayer;
+    public static Figures figure;
 
     GameRules gameRules;
     static Window window;
@@ -36,14 +37,16 @@ public class CrossNCircleGame {
         }
     }
 
-    private void nextRound(Data data){
+    private void nextRound(){
         if(Data.round % 2 == 0){
             activePlayer = playerA;
         }else{
             activePlayer = playerB;
         }
         Data.round++;
+        figure = activePlayer.figure;
         window.printTable();
+
     }
 
     private void startGame(Data data){
@@ -82,6 +85,7 @@ public class CrossNCircleGame {
         boolean game = true;
         data.printTable();
         activePlayer = playerA;
+        figure = activePlayer.figure;
         while (game) {
             activePlayer.move();
             data.printTable();
@@ -89,7 +93,7 @@ public class CrossNCircleGame {
             if (gameRules.gameOver) {
                 break;
             }
-            nextRound(data);
+            nextRound();
         }
     }
 

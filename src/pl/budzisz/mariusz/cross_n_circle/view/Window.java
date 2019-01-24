@@ -1,5 +1,6 @@
 package pl.budzisz.mariusz.cross_n_circle.view;
 
+import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class Window extends JFrame implements ActionListener {
     CrossNCircleButton [][] buttons;
 
     public Window(int width, int height, Data data){
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.data = data;
         setSize(width,height);
         setVisible(true);
@@ -21,6 +23,7 @@ public class Window extends JFrame implements ActionListener {
         buttons = new CrossNCircleButton[data.tab.length][data.tab.length];
         for(int i = 0; i < data.tab.length; i ++) {
             for (int j = 0; j < data.tab.length; j++) {
+                // W tej linijce ustawiam kazdy "String text" klasy JButton na symbol Figures.Empty.getSymbol()
                 buttons[i][j] = new CrossNCircleButton(i,j);
                 buttons[i][j].addActionListener(this);
                 getContentPane().add(buttons[i][j]);
@@ -28,11 +31,19 @@ public class Window extends JFrame implements ActionListener {
         }
         pack();
     }
+
+    /**
+     * Dobra teraz już wiem jak zmieniać text na przyciskach, ale ja sobie klikam po planszy a w konsoli dalej nic.
+     * Trzeba to powiązać GUI z logiką z CrossNCircleGame.
+     * @param e
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         int buttonX =((CrossNCircleButton)e.getSource()).getX();
         int buttonY =((CrossNCircleButton)e.getSource()).getY();
-        //data.tab[buttonX][buttonY] =
+        buttons[buttonX][buttonY].setText(CrossNCircleGame.figure.getSymbol());
+        System.out.println("wciśnięty");
     }
 
     public void printTable() {

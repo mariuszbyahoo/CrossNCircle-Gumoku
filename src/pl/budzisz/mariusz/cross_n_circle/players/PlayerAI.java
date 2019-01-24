@@ -4,6 +4,7 @@ import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.Direction;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
+import pl.budzisz.mariusz.cross_n_circle.view.Window;
 
 import java.util.Random;
 
@@ -17,8 +18,8 @@ public class PlayerAI extends Player {
     private boolean counterAttacked = false;
 
     Figures foesFigure = figure.equals(Figures.CROSS) ? Figures.CIRCLE : Figures.CROSS;
-    public PlayerAI (Figures figure , Data data, GameRules gameRules) {
-        super(figure , data);
+    public PlayerAI (Figures figure , Data data, Window window,  GameRules gameRules) {
+        super(figure , data, window);
         this.gameRules = gameRules;
     }
 

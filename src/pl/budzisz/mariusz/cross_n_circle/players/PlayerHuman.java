@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle.players;
 
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+import pl.budzisz.mariusz.cross_n_circle.view.Window;
 
 import java.util.Scanner;
 
@@ -9,8 +10,8 @@ public class PlayerHuman extends Player {
 
     private Scanner input = new Scanner(System.in);
 
-    public PlayerHuman(Figures figure, Data data) {
-        super(figure, data);
+    public PlayerHuman(Figures figure, Data data, Window window) {
+        super(figure, data, window);
     }
 
     @Override

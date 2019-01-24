@@ -84,16 +84,24 @@ public class PlayerAI extends Player {
             }
         }
         counterAttacked = false;
+
     }
 
     /**
+     * Tego typu komentarze są to JavaDocs, które są komentarzami ukazujące się także na poziomie
+     * wywoływania metod, wpisywania np. checkDirec(I tutaj powinna się pojawić podpowiedź, po podkreśleniu
+     * której po prawej pojawi się Javadoc w chmurce koło IntelliSense.
+     */
+
+
+    /**
      * Mamy tutaj metode checkDirection() ktora ma sprawdzic czy w danym kierunku wystepuja 3 takie same znaki
-     * No i teraz potrzeba zeby ta metoda brala czwarty znak z kolei i jego wspolrzedne zapisywala do pol
-     * O nazwach possibleX i possibleY
-     * @param x
-     * @param y
-     * @param direction
-     * @return
+     * No i bierze czwarte pole z kolei i jego wspolrzedne zapisuje do possibleX i possibleY
+     * czyt. potem wstawia w tym polu swoj znak.
+     * @param x współrzędna x
+     * @param y współrzędna y
+     * @param direction kierunek weryfikacji sprawdzania końca gry
+     * @return zwraca prawdę jeśli gra się zakończyła w tym miejscu, false jeśli się nie zakończyła.
      */
 
     private  boolean checkDirection(int x, int y, Direction direction) {
@@ -125,67 +133,26 @@ public class PlayerAI extends Player {
     }
 
     /**
-     * No i mamy wersje, w bardzo Alpha sztucznej inteligencji gdzie komputer potrafi juz samemu kontratakowac, problemy tu sa dwa:
+     * No i mamy wersje Alpha sztucznej inteligencji gdzie komputer potrafi juz samemu kontratakowac, problemy tu sa dwa:
      * 1-> gdy kontratakuje, to wtedy nadal wstawia jeszcze jedna figure.
      * ZROBIONE.
      * 2-> w przypadku gry w kolko i krzyzyk potrafi sie odwolac do elementu tablicy spoza jej zakresu, ArrayIndexOutOfBoundException.
      * ZROBIONE
      * 3-> w przypadku kontrataku komputer stara sie zablokowac ruch czlowieka z kazdego kierunku, nawet jesli w tym kierunku pozostalo
      * tylko jedno wolne pole, czyt. nic to nie da jak je zajmie.
-     *
-     * AD 3 -> pozostalo naprawic prawy gorny rog! (kontratakuje dopiero, gdy pojawi sie ciag czterech znakow, nie trzech.
+     * ZROBIONE.
      */
 
     public void checkCounterAttack() {
         for (int i = 0; i < data.tab.length; i++) {
             for (int j = 0; j < data.tab.length; j++) {
-                if (checkDirection(i, j, Direction.UP)) {
-                    if (counterAttacked) {
-                        continue;
-                    }else {
-                        counterAttack(possibleX, possibleY, data);
-                    }
-                } else if (checkDirection(i, j, Direction.DOWN)) {
-                    if (counterAttacked) {
-                        continue;
-                    }else {
-                        counterAttack(possibleX, possibleY, data);
-                    }
-                } else if (checkDirection(i, j, Direction.LEFT)) {
-                    if (counterAttacked) {
-                        continue;
-                    }else {
-                        counterAttack(possibleX, possibleY, data);
-                    }
-                } else if (checkDirection(i, j, Direction.RIGHT)) {
-                    if (counterAttacked) {
-                        continue;
-                    }else {
-                        counterAttack(possibleX, possibleY, data);
-                    }
-                } else if (checkDirection(i, j, Direction.LEFT_DOWN)) {
-                    if (counterAttacked) {
-                        continue;
-                    }else {
-                        counterAttack(possibleX, possibleY, data);
-                    }
-                } else if (checkDirection(i, j, Direction.LEFT_UP)) {
-                    if (counterAttacked) {
-                        continue;
-                    }else {
-                        counterAttack(possibleX, possibleY, data);
-                    }
-                } else if (checkDirection(i, j, Direction.RIGHT_DOWN)) {
-                    if (counterAttacked) {
-                        continue;
-                    }else {
-                        counterAttack(possibleX, possibleY, data);
-                    }
-                } else if (checkDirection(i, j, Direction.RIGHT_UP)) {
-                    if (counterAttacked) {
-                        continue;
-                    } else {
-                        counterAttack(possibleX, possibleY, data);
+                for (Direction direction : Direction.values()) {
+                    if (checkDirection(i, j, direction)) {
+                        if (counterAttacked) {
+                            continue;
+                        } else {
+                            counterAttack(possibleX, possibleY, data);
+                        }
                     }
                 }
             }

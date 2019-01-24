@@ -56,6 +56,10 @@ public class CrossNCircleGame {
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         Figures type = input.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
+        /**
+         * Poniższe ify i else'y można by zastąpić za pomocą klasy DataTransferObject (DTO)
+         * doczytaj o używaniu DTO.
+         */
 
         if (choice == Choice.AIOPPONENT.ordinal()) {
 

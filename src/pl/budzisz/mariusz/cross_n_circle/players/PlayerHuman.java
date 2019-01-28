@@ -1,5 +1,6 @@
 package pl.budzisz.mariusz.cross_n_circle.players;
 
+import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.view.Window;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class PlayerHuman extends Player {
 
     private Scanner input = new Scanner(System.in);
+    Window window;
 
     public PlayerHuman(Figures figure, Data data, Window window) {
         super(figure, data, window);
@@ -16,12 +18,18 @@ public class PlayerHuman extends Player {
 
     @Override
     public void move() {
+        window = CrossNCircleGame.getWindow();
         boolean correct = false;
         while(!correct) {
+            if (window.getButtonStatus()){
+                System.out.println("Ruch wykonany w okienku");
+                break;
+            }
             System.out.println("Wiersz numer: ");
             int x = input.nextInt() - 1;
             System.out.println("Kolumna numer: ");
             int y = input.nextInt() - 1;
+
             if (!data.tab[x][y].equals(Figures.EMPTY)) {
                 System.out.println("Zly ruch! ");
                 correct = false;

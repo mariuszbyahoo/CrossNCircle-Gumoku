@@ -12,23 +12,24 @@ public class Window extends JFrame implements ActionListener {
 
 
     Data data;
-    CrossNCircleButton [][] buttons;
+    CrossNCircleButton[][] buttons;
+    private boolean buttonClicked;
 
-    public Window(int width, int height, Data data){
+    public Window(int width, int height, Data data) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.data = data;
-        setSize(width,height);
-        setVisible(true);
-        getContentPane().setLayout(new GridLayout(data.tab.length,data.tab.length));
+        setSize(width, height);
+        getContentPane().setLayout(new GridLayout(data.tab.length, data.tab.length));
         buttons = new CrossNCircleButton[data.tab.length][data.tab.length];
-        for(int i = 0; i < data.tab.length; i ++) {
+        for (int i = 0; i < data.tab.length; i++) {
             for (int j = 0; j < data.tab.length; j++) {
                 // W tej linijce ustawiam kazdy "String text" klasy JButton na symbol Figures.Empty.getSymbol()
-                buttons[i][j] = new CrossNCircleButton(i,j);
+                buttons[i][j] = new CrossNCircleButton(i, j);
                 buttons[i][j].addActionListener(this);
                 getContentPane().add(buttons[i][j]);
             }
         }
+        setVisible(true);
         pack();
     }
 
@@ -43,7 +44,9 @@ public class Window extends JFrame implements ActionListener {
         int buttonX =((CrossNCircleButton)e.getSource()).getX();
         int buttonY =((CrossNCircleButton)e.getSource()).getY();
         buttons[buttonX][buttonY].setText(CrossNCircleGame.figure.getSymbol());
-        System.out.println("wciśnięty");
+        System.out.println("wciśnięty przycisk nr. " + buttonX + "|" + buttonY);
+        data.tab[buttonX][buttonY] = CrossNCircleGame.figure;
+        buttonClicked = true;
     }
 
     public void printTable() {
@@ -52,5 +55,8 @@ public class Window extends JFrame implements ActionListener {
                 buttons[i][j].setText(data.tab[i][j].getSymbol());
             }
         }
+    }
+    public boolean getButtonStatus(){
+        return buttonClicked;
     }
 }

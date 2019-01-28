@@ -1,5 +1,6 @@
 package pl.budzisz.mariusz.cross_n_circle.players;
 
+import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.Direction;
@@ -25,6 +26,7 @@ public class PlayerAI extends Player {
 
     @Override
     public void move() {
+        window = CrossNCircleGame.getWindow();
         checkCounterAttack();
         if (counterAttacked == false) {
             if (round == 2) {

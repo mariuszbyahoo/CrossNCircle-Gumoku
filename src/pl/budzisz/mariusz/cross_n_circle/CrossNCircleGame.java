@@ -66,18 +66,18 @@ public class CrossNCircleGame {
 
         if (choice == Choice.AIOPPONENT.ordinal()) {
 
-            playerA = PlayerFactory.getInstance(type , data , false , true, gameRules);
-            playerB = PlayerFactory.getInstance(type , data , true , false, gameRules);
+            playerA = PlayerFactory.getInstance(type , data , false , true, window, gameRules);
+            playerB = PlayerFactory.getInstance(type , data , true , false, window, gameRules);
 
         } else if (choice == Choice.AIVSAI.ordinal()) {
 
-            playerA = PlayerFactory.getInstance(type, data , false , false, gameRules);
-            playerB = PlayerFactory.getInstance(type,data , true , false, gameRules);
+            playerA = PlayerFactory.getInstance(type, data , false , false, window, gameRules);
+            playerB = PlayerFactory.getInstance(type,data , true , false, window, gameRules);
 
         } else {
 
-            playerA = PlayerFactory.getInstance(type,data , false , true, gameRules);
-            playerB = PlayerFactory.getInstance(type,data , true , true, gameRules);
+            playerA = PlayerFactory.getInstance(type,data , false , true, window, gameRules);
+            playerB = PlayerFactory.getInstance(type,data , true , true, window, gameRules);
         }
     }
 
@@ -97,12 +97,20 @@ public class CrossNCircleGame {
         }
     }
 
+    /**
+     * Teraz trzeba poustawiać, żeby window klasy Player była podłączona do obiektu window w metodzie main.
+     * @param args
+     */
     public static void main(String[] args) {
         Data data = new Data();
         CrossNCircleGame cross = new CrossNCircleGame();
+        window = new Window(2000,1500,data);
         cross.startGame(data);
-        window = new Window(1200,800,data);
         cross.play(data);
 
+    }
+
+    public static Window getWindow() {
+        return window;
     }
 }

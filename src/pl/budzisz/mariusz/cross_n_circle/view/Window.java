@@ -45,14 +45,14 @@ public class Window extends JFrame implements ActionListener {
         int buttonY =((CrossNCircleButton)e.getSource()).getY();
         buttons[buttonX][buttonY].setText(CrossNCircleGame.figure.getSymbol());
         System.out.println("wciśnięty przycisk nr. " + buttonX + "|" + buttonY);
-        data.tab[buttonX][buttonY] = CrossNCircleGame.figure;
+        data.tab[buttonX][buttonY].setText(CrossNCircleGame.figure.getSymbol());
         buttonClicked = true;
     }
 
     public void printTable() {
         for (int i = 0; i< data.tab.length ; i++){
             for (int j = 0; j < data.tab.length; j++){
-                buttons[i][j].setText(data.tab[i][j].getSymbol());
+                buttons[i][j].setText(data.tab[i][j].getText());
             }
         }
     }

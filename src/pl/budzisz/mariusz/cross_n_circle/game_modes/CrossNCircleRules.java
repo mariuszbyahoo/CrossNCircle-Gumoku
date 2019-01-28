@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle.game_modes;
 
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+import pl.budzisz.mariusz.cross_n_circle.view.CrossNCircleButton;
 
 public class CrossNCircleRules extends GameRules {
 
@@ -38,8 +39,8 @@ public class CrossNCircleRules extends GameRules {
     public boolean checkEndInRow(int rowNumber) {
         boolean gameOver = true;
         for (int i = 1; i < data.tab[rowNumber].length; i++) {
-            Figures current = data.tab[rowNumber][i];
-            Figures previous = data.tab[rowNumber][i - 1];
+            CrossNCircleButton current = data.tab[rowNumber][i];
+            CrossNCircleButton previous = data.tab[rowNumber][i - 1];
             if (current.equals(Figures.EMPTY) || !current.equals(previous)) {
                 gameOver = false;
                 break;
@@ -51,8 +52,8 @@ public class CrossNCircleRules extends GameRules {
     public boolean checkEndInColumn(int columnNumber) {
         boolean gameOver = true;
         for (int i = 1; i < data.tab.length; i++) {
-            Figures current = data.tab[i][columnNumber];
-            Figures previous = data.tab[i - 1][columnNumber];
+            CrossNCircleButton current = data.tab[i][columnNumber];
+            CrossNCircleButton previous = data.tab[i - 1][columnNumber];
 
             if (current.equals(Figures.EMPTY) || !current.equals(previous)) {
                 gameOver = false;

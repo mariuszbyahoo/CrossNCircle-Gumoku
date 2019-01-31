@@ -39,4 +39,7 @@ public class PlayerHuman extends Player {
             }
         }
     }
+    public Figures getFigure(){
+        return figure;
+    }
 }

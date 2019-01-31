@@ -170,4 +170,7 @@ public class PlayerAI extends Player {
             System.out.println("Komputer kontratakuje!");
         }
     }
+    public Figures getFigure(){
+        return figure;
+    }
 }

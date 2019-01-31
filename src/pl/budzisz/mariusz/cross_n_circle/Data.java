@@ -1,29 +1,32 @@
 package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
-import pl.budzisz.mariusz.cross_n_circle.view.CrossNCircleButton;
 
 import java.util.Scanner;
 
 
 public class Data {
     public static int round = 1;
-    public Figures[][] figures;
-    public CrossNCircleButton[][]tab;
+    public Figures[][] tab;
+    private CrossNCircleGame crossNCircleGame;
 
-    public Data() {
+
+
+
+    public Data(CrossNCircleGame crossNCircleGame) {
         Scanner input = new Scanner(System.in);
         System.out.println("Jak duża plansza?");
         int x = input.nextInt();
-        tab = new CrossNCircleButton[x][x];
+        tab = new Figures[x][x];
         initTable();
+        this.crossNCircleGame = crossNCircleGame;
     }
 
 
     public void initTable() {
         for (int i = 0; i < tab.length; i++) {
             for (int j = 0; j < tab.length; j++) {
-                tab[i][j].setText(Figures.EMPTY.getSymbol());
+                tab[i][j] = Figures.EMPTY;
             }
         }
     }
@@ -48,5 +51,9 @@ public class Data {
             }
             System.out.println("|");
         }
+    }
+    public void doMove(int x, int y){
+        tab[x][y] = crossNCircleGame.getActivePlayer().getFigure();
+        crossNCircleGame.nextRound();
     }
 }

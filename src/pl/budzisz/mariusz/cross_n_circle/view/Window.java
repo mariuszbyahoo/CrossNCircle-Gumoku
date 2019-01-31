@@ -1,6 +1,5 @@
 package pl.budzisz.mariusz.cross_n_circle.view;
 
-import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 
 import javax.swing.*;
@@ -12,51 +11,42 @@ public class Window extends JFrame implements ActionListener {
 
 
     Data data;
-    CrossNCircleButton[][] buttons;
-    private boolean buttonClicked;
+    CrossNCircleButton [][] buttons;
 
-    public Window(int width, int height, Data data) {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+    public Window(int width, int height, Data data){
         this.data = data;
-        setSize(width, height);
-        getContentPane().setLayout(new GridLayout(data.tab.length, data.tab.length));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(width,height);
+        setVisible(true);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(data.tab.length,data.tab.length));
         buttons = new CrossNCircleButton[data.tab.length][data.tab.length];
-        for (int i = 0; i < data.tab.length; i++) {
+        for(int i = 0; i < data.tab.length; i ++) {
             for (int j = 0; j < data.tab.length; j++) {
-                // W tej linijce ustawiam kazdy "String text" klasy JButton na symbol Figures.Empty.getSymbol()
-                buttons[i][j] = new CrossNCircleButton(i, j);
+                buttons[i][j] = new CrossNCircleButton(i,j);
                 buttons[i][j].addActionListener(this);
-                getContentPane().add(buttons[i][j]);
+                panel.add(buttons[i][j]);
             }
         }
-        setVisible(true);
+        panel.setSize(width,height);
+        panel.setDoubleBuffered(true);
+        getContentPane().add(panel);
+        panel.repaint();
         pack();
     }
-
-    /**
-     * Dobra teraz już wiem jak zmieniać text na przyciskach, ale ja sobie klikam po planszy a w konsoli dalej nic.
-     * Trzeba to powiązać GUI z logiką z CrossNCircleGame.
-     * @param e
-     */
-
     @Override
     public void actionPerformed(ActionEvent e) {
         int buttonX =((CrossNCircleButton)e.getSource()).getX();
         int buttonY =((CrossNCircleButton)e.getSource()).getY();
-        buttons[buttonX][buttonY].setText(CrossNCircleGame.figure.getSymbol());
-        System.out.println("wciśnięty przycisk nr. " + buttonX + "|" + buttonY);
-        data.tab[buttonX][buttonY].setText(CrossNCircleGame.figure.getSymbol());
-        buttonClicked = true;
+        data.doMove(buttonX,buttonY);
     }
 
     public void printTable() {
         for (int i = 0; i< data.tab.length ; i++){
             for (int j = 0; j < data.tab.length; j++){
-                buttons[i][j].setText(data.tab[i][j].getText());
+                buttons[i][j].setText(data.tab[i][j].getSymbol());
             }
         }
-    }
-    public boolean getButtonStatus(){
-        return buttonClicked;
     }
 }

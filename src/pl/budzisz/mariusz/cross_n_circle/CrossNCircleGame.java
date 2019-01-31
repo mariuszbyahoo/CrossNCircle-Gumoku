@@ -10,16 +10,10 @@ import pl.budzisz.mariusz.cross_n_circle.view.Window;
 
 import java.util.Scanner;
 
-/**
- * Praca domowa dopracować algorytm by komputer gral w Gumoku.
- * W pierwszej kolejnosci zrob tak by przeszkadzal graczowi czy.
- */
-
 public class CrossNCircleGame {
     Player playerA;
     Player playerB;
     Player activePlayer;
-    public static Figures figure;
 
     GameRules gameRules;
     static Window window;
@@ -37,16 +31,14 @@ public class CrossNCircleGame {
         }
     }
 
-    private void nextRound(){
+    public void nextRound(){
         if(Data.round % 2 == 0){
             activePlayer = playerA;
         }else{
             activePlayer = playerB;
         }
         Data.round++;
-        figure = activePlayer.figure;
         window.printTable();
-
     }
 
     private void startGame(Data data){
@@ -59,33 +51,32 @@ public class CrossNCircleGame {
         System.out.println("Zaczyna(sz) kólkiem (O) czy krzyżykiem (X)?");
         Figures type = input.nextLine().equals(Figures.CROSS.toString()) ? Figures.CROSS : Figures.CIRCLE; // lub Figures.valueOf()
 
-        /**
-         * Poniższe ify i else'y można by zastąpić za pomocą klasy DataTransferObject (DTO)
-         * doczytaj o używaniu DTO.
-         */
 
         if (choice == Choice.AIOPPONENT.ordinal()) {
 
-            playerA = PlayerFactory.getInstance(type , data , false , true, window, gameRules);
-            playerB = PlayerFactory.getInstance(type , data , true , false, window, gameRules);
+            playerA = PlayerFactory.getInstance(type , data , false , true, gameRules);
+            playerB = PlayerFactory.getInstance(type , data , true , false, gameRules);
 
         } else if (choice == Choice.AIVSAI.ordinal()) {
 
-            playerA = PlayerFactory.getInstance(type, data , false , false, window, gameRules);
-            playerB = PlayerFactory.getInstance(type,data , true , false, window, gameRules);
+            playerA = PlayerFactory.getInstance(type, data , false , false, gameRules);
+            playerB = PlayerFactory.getInstance(type,data , true , false, gameRules);
 
         } else {
 
-            playerA = PlayerFactory.getInstance(type,data , false , true, window, gameRules);
-            playerB = PlayerFactory.getInstance(type,data , true , true, window, gameRules);
+            playerA = PlayerFactory.getInstance(type,data , false , true, gameRules);
+            playerB = PlayerFactory.getInstance(type,data , true , true, gameRules);
         }
+    }
+
+    public Player getActivePlayer(){
+        return activePlayer;
     }
 
     private void play(Data data){
         boolean game = true;
         data.printTable();
         activePlayer = playerA;
-        figure = activePlayer.figure;
         while (game) {
             activePlayer.move();
             data.printTable();
@@ -97,20 +88,11 @@ public class CrossNCircleGame {
         }
     }
 
-    /**
-     * Teraz trzeba poustawiać, żeby window klasy Player była podłączona do obiektu window w metodzie main.
-     * @param args
-     */
     public static void main(String[] args) {
-        Data data = new Data();
         CrossNCircleGame cross = new CrossNCircleGame();
-        window = new Window(2000,1500,data);
+        Data data = new Data(cross);
         cross.startGame(data);
+        window = new Window(1200,800,data);
         cross.play(data);
-
-    }
-
-    public static Window getWindow() {
-        return window;
     }
 }

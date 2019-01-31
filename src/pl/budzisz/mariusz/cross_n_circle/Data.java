@@ -8,16 +8,18 @@ import java.util.Scanner;
 public class Data {
     public static int round = 1;
     public Figures[][] tab;
+    private CrossNCircleGame crossNCircleGame;
 
 
 
 
-    public Data() {
+    public Data(CrossNCircleGame crossNCircleGame) {
         Scanner input = new Scanner(System.in);
         System.out.println("Jak duża plansza?");
         int x = input.nextInt();
         tab = new Figures[x][x];
         initTable();
+        this.crossNCircleGame = crossNCircleGame;
     }
 
 
@@ -49,5 +51,9 @@ public class Data {
             }
             System.out.println("|");
         }
+    }
+    public void doMove(int x, int y){
+        tab[x][y] = crossNCircleGame.getActivePlayer().getFigure();
+        crossNCircleGame.nextRound();
     }
 }

@@ -10,11 +10,6 @@ import pl.budzisz.mariusz.cross_n_circle.view.Window;
 
 import java.util.Scanner;
 
-/**
- * Praca domowa dopracować algorytm by komputer gral w Gumoku.
- * W pierwszej kolejnosci zrob tak by przeszkadzal graczowi czy.
- */
-
 public class CrossNCircleGame {
     Player playerA;
     Player playerB;
@@ -36,7 +31,7 @@ public class CrossNCircleGame {
         }
     }
 
-    private void nextRound(Data data){
+    public void nextRound(){
         if(Data.round % 2 == 0){
             activePlayer = playerA;
         }else{
@@ -74,6 +69,10 @@ public class CrossNCircleGame {
         }
     }
 
+    public Player getActivePlayer(){
+        return activePlayer;
+    }
+
     private void play(Data data){
         boolean game = true;
         data.printTable();
@@ -85,16 +84,15 @@ public class CrossNCircleGame {
             if (gameRules.gameOver) {
                 break;
             }
-            nextRound(data);
+            nextRound();
         }
     }
 
     public static void main(String[] args) {
-        Data data = new Data();
         CrossNCircleGame cross = new CrossNCircleGame();
+        Data data = new Data(cross);
         cross.startGame(data);
         window = new Window(1200,800,data);
         cross.play(data);
-
     }
 }

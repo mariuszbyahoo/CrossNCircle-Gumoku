@@ -16,7 +16,7 @@ public class CrossNCircleGame {
     Player activePlayer;
     boolean isVsComputer;
 
-    GameRules gameRules;
+    public GameRules gameRules;
     static Window window;
 
     int choice;
@@ -96,7 +96,7 @@ public class CrossNCircleGame {
         CrossNCircleGame cross = new CrossNCircleGame();
         Data data = new Data(cross);
         cross.startGame(data);
-        window = new Window(1200,800,data);
+        window = new Window(1200, 800, data, cross);
         cross.play(data);
     }
 }

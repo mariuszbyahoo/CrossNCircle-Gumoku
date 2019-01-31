@@ -1,5 +1,6 @@
 package pl.budzisz.mariusz.cross_n_circle.view;
 
+import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 
 import javax.swing.*;
@@ -12,9 +13,11 @@ public class Window extends JFrame implements ActionListener {
 
     Data data;
     CrossNCircleButton [][] buttons;
+    CrossNCircleGame crossNCircleGame;
 
 
-    public Window(int width, int height, Data data){
+    public Window(int width, int height, Data data, CrossNCircleGame crossNCircleGame) {
+        this.crossNCircleGame = crossNCircleGame;
         this.data = data;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -39,6 +42,9 @@ public class Window extends JFrame implements ActionListener {
         int buttonX =((CrossNCircleButton)e.getSource()).getArrayPositionX();
         int buttonY =((CrossNCircleButton)e.getSource()).getArrayPositionY();
         data.doMove(buttonX,buttonY);
+        if (crossNCircleGame.gameRules.gameOver) {
+            JOptionPane.showMessageDialog(this, "Koniec Gry", "Koniec Gry", 1);
+        }
     }
 
     public void printTable() {
@@ -48,4 +54,5 @@ public class Window extends JFrame implements ActionListener {
             }
         }
     }
+
 }

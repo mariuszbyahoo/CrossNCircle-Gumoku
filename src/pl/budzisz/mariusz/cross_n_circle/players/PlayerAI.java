@@ -67,6 +67,7 @@ public class PlayerAI extends Player {
                             } else {
                                 data.tab[i][j] = Figures.EMPTY;
                             }
+                            return;
                         }
                     }
                 }

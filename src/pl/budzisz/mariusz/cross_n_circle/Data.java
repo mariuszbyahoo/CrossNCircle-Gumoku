@@ -1,11 +1,14 @@
 package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
+import pl.budzisz.mariusz.cross_n_circle.players.Player;
+import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
 
 import java.util.Scanner;
 
 
 public class Data {
+    Player opponent;
     public static int round = 1;
     public Figures[][] tab;
     private CrossNCircleGame crossNCircleGame;
@@ -53,7 +56,16 @@ public class Data {
         }
     }
     public void doMove(int x, int y){
-        tab[x][y] = crossNCircleGame.getActivePlayer().getFigure();
-        crossNCircleGame.nextRound();
+        if (!tab[x][y].equals(Figures.EMPTY)) {
+            System.out.println("Zly ruch! ");
+        } else {
+            tab[x][y] = crossNCircleGame.getActivePlayer().getFigure();
+            crossNCircleGame.nextRound();
+        }
+        if (crossNCircleGame.isVsComputer) {
+            opponent = PlayerFactory.getAiInstance(crossNCircleGame.getActivePlayer().getFigure(), this, crossNCircleGame.gameRules);
+            opponent.move();
+            crossNCircleGame.nextRound();
+        }
     }
 }

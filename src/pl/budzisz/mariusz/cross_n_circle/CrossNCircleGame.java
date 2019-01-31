@@ -14,6 +14,7 @@ public class CrossNCircleGame {
     Player playerA;
     Player playerB;
     Player activePlayer;
+    boolean isVsComputer;
 
     GameRules gameRules;
     static Window window;
@@ -56,16 +57,19 @@ public class CrossNCircleGame {
 
             playerA = PlayerFactory.getInstance(type , data , false , true, gameRules);
             playerB = PlayerFactory.getInstance(type , data , true , false, gameRules);
+            isVsComputer = true;
 
         } else if (choice == Choice.AIVSAI.ordinal()) {
 
             playerA = PlayerFactory.getInstance(type, data , false , false, gameRules);
             playerB = PlayerFactory.getInstance(type,data , true , false, gameRules);
+            isVsComputer = true;
 
         } else {
 
             playerA = PlayerFactory.getInstance(type,data , false , true, gameRules);
             playerB = PlayerFactory.getInstance(type,data , true , true, gameRules);
+            isVsComputer = false;
         }
     }
 

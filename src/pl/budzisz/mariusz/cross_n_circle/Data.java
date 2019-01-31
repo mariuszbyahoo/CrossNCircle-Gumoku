@@ -55,6 +55,18 @@ public class Data {
             System.out.println("|");
         }
     }
+
+    public boolean isPossible2move() {
+        for (Figures figures[] : tab) {
+            for (Figures figures1 : figures) {
+                if (figures1.equals(Figures.EMPTY)) {
+                    return true;
+                }
+            }
+        }
+        return true;
+    }
+
     public void doMove(int x, int y){
         if (!tab[x][y].equals(Figures.EMPTY)) {
             System.out.println("Zly ruch! ");

@@ -5,6 +5,7 @@ import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.Direction;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
 
+import javax.swing.*;
 import java.util.Random;
 
 import static pl.budzisz.mariusz.cross_n_circle.Data.round;

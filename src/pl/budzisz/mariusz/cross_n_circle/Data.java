@@ -4,6 +4,7 @@ import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.players.Player;
 import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 
@@ -78,6 +79,7 @@ public class Data {
                 opponent.move();
                 crossNCircleGame.nextRound();
             }
+            crossNCircleGame.gameRules.checkEnd();
             printTable();
         }
     }

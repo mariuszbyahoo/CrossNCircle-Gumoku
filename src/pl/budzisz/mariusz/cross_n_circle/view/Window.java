@@ -17,7 +17,6 @@ public class Window extends JFrame implements ActionListener {
     public Window(int width, int height, Data data){
         this.data = data;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(width,height);
         setVisible(true);
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(data.tab.length,data.tab.length));
@@ -29,7 +28,7 @@ public class Window extends JFrame implements ActionListener {
                 panel.add(buttons[i][j]);
             }
         }
-        panel.setSize(width,height);
+        panel.setPreferredSize(new Dimension(width,height));
         panel.setDoubleBuffered(true);
         getContentPane().add(panel);
         panel.repaint();
@@ -37,8 +36,8 @@ public class Window extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        int buttonX =((CrossNCircleButton)e.getSource()).getX();
-        int buttonY =((CrossNCircleButton)e.getSource()).getY();
+        int buttonX =((CrossNCircleButton)e.getSource()).getArrayPositionX();
+        int buttonY =((CrossNCircleButton)e.getSource()).getArrayPositionY();
         data.doMove(buttonX,buttonY);
     }
 

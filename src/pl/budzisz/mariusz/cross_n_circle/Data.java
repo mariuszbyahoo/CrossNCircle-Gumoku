@@ -65,7 +65,7 @@ public class Data {
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public void doMove(int x, int y){

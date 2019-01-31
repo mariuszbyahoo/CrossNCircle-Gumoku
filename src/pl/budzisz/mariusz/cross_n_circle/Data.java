@@ -61,11 +61,12 @@ public class Data {
         } else {
             tab[x][y] = crossNCircleGame.getActivePlayer().getFigure();
             crossNCircleGame.nextRound();
-        }
-        if (crossNCircleGame.isVsComputer) {
-            opponent = PlayerFactory.getAiInstance(crossNCircleGame.getActivePlayer().getFigure(), this, crossNCircleGame.gameRules);
-            opponent.move();
-            crossNCircleGame.nextRound();
+            if (crossNCircleGame.isVsComputer) {
+                opponent = PlayerFactory.getAiInstance(crossNCircleGame.getActivePlayer().getFigure(), this, crossNCircleGame.gameRules);
+                opponent.move();
+                crossNCircleGame.nextRound();
+            }
+            printTable();
         }
     }
 }

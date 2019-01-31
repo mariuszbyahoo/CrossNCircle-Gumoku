@@ -71,6 +71,7 @@ public class PlayerAI extends Player {
                             } else {
                                 data.tab[i][j].setText(Figures.EMPTY.getSymbol());
                             }
+                            return;
                         }
                     }
                 }

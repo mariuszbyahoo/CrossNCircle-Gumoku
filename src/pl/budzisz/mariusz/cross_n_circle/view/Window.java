@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle.view;
 
 import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
+import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameStatus;
 
 import javax.swing.*;
@@ -46,10 +47,10 @@ public class Window extends JFrame implements ActionListener {
         if (CrossNCircleGame.gameStatus.equals(GameStatus.DRAW)) {
             JOptionPane.showMessageDialog(this, CrossNCircleGame.gameStatus.getDesc(), CrossNCircleGame.gameStatus.getDesc(), -1);
             System.exit(1);
-        } else if (CrossNCircleGame.gameStatus.equals(GameStatus.O_WON)) {
+        } else if (CrossNCircleGame.gameStatus.equals(GameStatus.O_WON) && crossNCircleGame.gameRules.gameOver) {
             JOptionPane.showMessageDialog(this, CrossNCircleGame.gameStatus.getDesc(), CrossNCircleGame.gameStatus.getDesc(), 1);
             System.exit(1);
-        } else if (CrossNCircleGame.gameStatus.equals(GameStatus.X_WON)) {
+        } else if (CrossNCircleGame.gameStatus.equals(GameStatus.X_WON) && crossNCircleGame.gameRules.gameOver) {
             JOptionPane.showMessageDialog(this, CrossNCircleGame.gameStatus.getDesc(), CrossNCircleGame.gameStatus.getDesc(), 1);
             System.exit(1);
         }

@@ -1,5 +1,6 @@
 package pl.budzisz.mariusz.cross_n_circle.game_modes;
 
+import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
@@ -43,6 +44,13 @@ public class GumokuRules extends GameRules {
             }
         } else {
             return false;
+        }
+        if (data.tab[x][y] == Figures.CIRCLE) {
+            CrossNCircleGame.gameStatus = GameStatus.O_WON;
+            System.out.println(CrossNCircleGame.gameStatus.getDesc());
+        } else if (data.tab[x][y] == Figures.CROSS) {
+            CrossNCircleGame.gameStatus = GameStatus.X_WON;
+            System.out.println(CrossNCircleGame.gameStatus.getDesc());
         }
         return true;
     }

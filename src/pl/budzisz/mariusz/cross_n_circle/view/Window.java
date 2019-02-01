@@ -44,9 +44,14 @@ public class Window extends JFrame implements ActionListener {
         int buttonY =((CrossNCircleButton)e.getSource()).getArrayPositionY();
         data.doMove(buttonX,buttonY);
         if (CrossNCircleGame.gameStatus.equals(GameStatus.DRAW)) {
-            JOptionPane.showMessageDialog(this, "Remis", "Remis", -1);
-        } else if (crossNCircleGame.gameRules.gameOver) {
-            JOptionPane.showMessageDialog(this, "Koniec Gry", "Koniec Gry", 2);
+            JOptionPane.showMessageDialog(this, CrossNCircleGame.gameStatus.getDesc(), CrossNCircleGame.gameStatus.getDesc(), -1);
+            System.exit(1);
+        } else if (CrossNCircleGame.gameStatus.equals(GameStatus.O_WON)) {
+            JOptionPane.showMessageDialog(this, CrossNCircleGame.gameStatus.getDesc(), CrossNCircleGame.gameStatus.getDesc(), 1);
+            System.exit(1);
+        } else if (CrossNCircleGame.gameStatus.equals(GameStatus.X_WON)) {
+            JOptionPane.showMessageDialog(this, CrossNCircleGame.gameStatus.getDesc(), CrossNCircleGame.gameStatus.getDesc(), 1);
+            System.exit(1);
         }
     }
 

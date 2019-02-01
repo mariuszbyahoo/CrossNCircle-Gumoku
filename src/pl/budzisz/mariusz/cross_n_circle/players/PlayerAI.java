@@ -75,18 +75,14 @@ public class PlayerAI extends Player {
                         }
                     }
 
-                    if (data.isPossible2move()) {
-                        while (true) {
-                            Random rn = new Random();
-                            int x = rn.nextInt(data.tab.length);
-                            int y = rn.nextInt(data.tab.length);
-                            if (data.tab[y][x].equals(Figures.EMPTY)) {
-                                data.tab[y][x] = figure;
-                                break;
-                            }
+                    while (true) {
+                        Random rn = new Random();
+                        int x = rn.nextInt(data.tab.length);
+                        int y = rn.nextInt(data.tab.length);
+                        if (data.tab[y][x].equals(Figures.EMPTY)) {
+                            data.tab[y][x] = figure;
+                            break;
                         }
-                    } else {
-                        System.out.println("Nie da się wykonać ruchu");
                     }
                 }
             }

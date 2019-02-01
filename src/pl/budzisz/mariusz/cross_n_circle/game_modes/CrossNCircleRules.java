@@ -1,17 +1,17 @@
+
 package pl.budzisz.mariusz.cross_n_circle.game_modes;
 
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
-import pl.budzisz.mariusz.cross_n_circle.view.CrossNCircleButton;
 
 public class CrossNCircleRules extends GameRules {
 
-        public CrossNCircleRules(Data data){
-            super(data);
-        }
+    public CrossNCircleRules(Data data) {
+        super(data);
+    }
 
-        public void checkEnd() {
-            this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();
+    public void checkEnd() {
+        this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();
     }
 
     private boolean endGameInColumn() {
@@ -39,8 +39,8 @@ public class CrossNCircleRules extends GameRules {
     public boolean checkEndInRow(int rowNumber) {
         boolean gameOver = true;
         for (int i = 1; i < data.tab[rowNumber].length; i++) {
-            CrossNCircleButton current = data.tab[rowNumber][i];
-            CrossNCircleButton previous = data.tab[rowNumber][i - 1];
+            Figures current = data.tab[rowNumber][i];
+            Figures previous = data.tab[rowNumber][i - 1];
             if (current.equals(Figures.EMPTY) || !current.equals(previous)) {
                 gameOver = false;
                 break;
@@ -52,8 +52,8 @@ public class CrossNCircleRules extends GameRules {
     public boolean checkEndInColumn(int columnNumber) {
         boolean gameOver = true;
         for (int i = 1; i < data.tab.length; i++) {
-            CrossNCircleButton current = data.tab[i][columnNumber];
-            CrossNCircleButton previous = data.tab[i - 1][columnNumber];
+            Figures current = data.tab[i][columnNumber];
+            Figures previous = data.tab[i - 1][columnNumber];
 
             if (current.equals(Figures.EMPTY) || !current.equals(previous)) {
                 gameOver = false;

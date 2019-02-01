@@ -1,9 +1,11 @@
 package pl.budzisz.mariusz.cross_n_circle.players;
 
+import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.Direction;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
+import pl.budzisz.mariusz.cross_n_circle.game_modes.GameStatus;
 
 import javax.swing.*;
 import java.util.Random;
@@ -92,6 +94,9 @@ public class PlayerAI extends Player {
 
         } else {
             System.out.println("Nie da się wykonać ruchu...");
+            CrossNCircleGame.gameStatus = GameStatus.DRAW;
+            System.out.println(GameStatus.DRAW.getDesc());
+            this.gameRules.gameOver = true;
         }
     }
 

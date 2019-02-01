@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
+import pl.budzisz.mariusz.cross_n_circle.game_modes.GameStatus;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.RulesFactory;
 import pl.budzisz.mariusz.cross_n_circle.players.Choice;
 import pl.budzisz.mariusz.cross_n_circle.players.Player;
@@ -15,6 +16,7 @@ public class CrossNCircleGame {
     Player playerB;
     Player activePlayer;
     boolean isVsComputer;
+    public static GameStatus gameStatus = GameStatus.IN_PROGRESS;
 
     public GameRules gameRules;
     static Window window;

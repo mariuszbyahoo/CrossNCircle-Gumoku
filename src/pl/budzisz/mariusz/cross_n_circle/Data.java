@@ -4,15 +4,16 @@ import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.players.Player;
 import pl.budzisz.mariusz.cross_n_circle.players.PlayerFactory;
 
-import javax.swing.*;
+import java.io.*;
 import java.util.Scanner;
 
 
-public class Data {
+public class Data implements Serializable {
     Player opponent;
     public static int round = 1;
     public Figures[][] tab;
     private CrossNCircleGame crossNCircleGame;
+    private Scanner input = new Scanner(System.in);
 
 
 
@@ -75,12 +76,49 @@ public class Data {
             tab[x][y] = crossNCircleGame.getActivePlayer().getFigure();
             crossNCircleGame.nextRound();
             if (crossNCircleGame.isVsComputer) {
-                opponent = PlayerFactory.getAiInstance(crossNCircleGame.getActivePlayer().getFigure(), this, crossNCircleGame.gameRules);
+                opponent = PlayerFactory.getAiInstance(crossNCircleGame.getActivePlayer().getFigure(), this, CrossNCircleGame.gameRules);
                 opponent.move();
                 crossNCircleGame.nextRound();
             }
-            crossNCircleGame.gameRules.checkEnd();
+            CrossNCircleGame.gameRules.checkEnd();
             printTable();
+        }
+    }
+
+    private String convertToString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < this.tab.length; i++) {
+            for (int j = 0; j < this.tab.length; j++) {
+                builder.append(this.tab[i][j].getSymbol());
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
+    public void save() {
+        System.out.println("Podaj nazwe pliku (suffix .txt będzie dodany za Ciebie): ");
+        String fileName = input.nextLine() + ".txt";
+        try (
+                var fw = new FileWriter(fileName);
+                var bw = new BufferedWriter(fw)
+        ) {
+            boolean fileSaved = false;
+            while (!fileSaved) {
+                var file = new File(fileName);
+                boolean fileExists = file.exists();
+                if (!fileExists) {
+                    bw.write(convertToString());
+                    fileSaved = true;
+                    System.exit(1);
+                } else {
+                    System.out.println("Taki plik już istnieje, wybierz inną nazwę.");
+                    fileName = input.nextLine();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Nie udało się zapisać pliku");
+            e.printStackTrace();
         }
     }
 }

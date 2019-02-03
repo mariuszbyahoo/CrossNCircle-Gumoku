@@ -18,7 +18,7 @@ public class CrossNCircleGame {
     boolean isVsComputer;
     public static GameStatus gameStatus = GameStatus.IN_PROGRESS;
 
-    public GameRules gameRules;
+    public static GameRules gameRules;
     static Window window;
 
     int choice;

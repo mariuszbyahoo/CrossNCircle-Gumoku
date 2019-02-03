@@ -4,6 +4,9 @@ import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class GumokuRules extends GameRules {
 
     public GumokuRules(Data data) {
@@ -11,6 +14,7 @@ public class GumokuRules extends GameRules {
     }
 
     public void checkEnd() {
+        this.gameOver = checkDraw();
         for (int i = 0; i < data.tab.length  ; i ++){
             for (int j = 0; j < data.tab.length  ; j++){
                 this.gameOver = checkDirection(i,j,Direction.UP) ||
@@ -53,6 +57,22 @@ public class GumokuRules extends GameRules {
             System.out.println(CrossNCircleGame.gameStatus.getDesc());
         }
         return true;
+    }
+
+    public boolean checkDraw() {
+        if (!CrossNCircleGame.gameStatus.equals(GameStatus.DRAW)) {
+            for (int i = 0; i < data.tab.length; i++) {
+                List<Figures> tabList = Arrays.asList(data.tab[i]);
+                if (tabList.contains(Figures.EMPTY)) {
+                    return false;
+                }
+            }
+            System.out.println("Nie ma juz mozliwosci ruchu...");
+            CrossNCircleGame.gameStatus = GameStatus.DRAW;
+            System.out.println(CrossNCircleGame.gameStatus.getDesc());
+            return true;
+        }
+        return false;
     }
 
 }

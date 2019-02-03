@@ -23,6 +23,11 @@ public class CrossNCircleRules extends GameRules {
         for (int i = 0; i < data.tab.length; i++) {
             if (checkEndInColumn(i)) {
                 result = true;
+                if (data.tab[1][i].equals(Figures.CROSS)) {
+                    CrossNCircleGame.gameStatus = GameStatus.X_WON;
+                } else if (data.tab[1][i].equals(Figures.CIRCLE)) {
+                    CrossNCircleGame.gameStatus = GameStatus.O_WON;
+                }
                 break;
             }
         }
@@ -34,6 +39,11 @@ public class CrossNCircleRules extends GameRules {
         for (int i = 0; i < data.tab.length; i++) {
             if (checkEndInRow(i)) {
                 result = true;
+                if (data.tab[i][1].equals(Figures.CROSS)) {
+                    CrossNCircleGame.gameStatus = GameStatus.X_WON;
+                } else if (data.tab[i][1].equals(Figures.CIRCLE)) {
+                    CrossNCircleGame.gameStatus = GameStatus.O_WON;
+                }
                 break;
             }
         }
@@ -75,6 +85,11 @@ public class CrossNCircleRules extends GameRules {
                 break;
             }
         }
+        if (data.tab[1][1].equals(Figures.CROSS)) {
+            CrossNCircleGame.gameStatus = GameStatus.X_WON;
+        } else if (data.tab[1][1].equals(Figures.CIRCLE)) {
+            CrossNCircleGame.gameStatus = GameStatus.O_WON;
+        }
         return result;
     }
 
@@ -85,6 +100,11 @@ public class CrossNCircleRules extends GameRules {
                 result = false;
                 break;
             }
+        }
+        if (data.tab[1][data.tab.length - 2].equals(Figures.CROSS)) {
+            CrossNCircleGame.gameStatus = GameStatus.X_WON;
+        } else if (data.tab[1][data.tab.length - 2].equals(Figures.CIRCLE)) {
+            CrossNCircleGame.gameStatus = GameStatus.O_WON;
         }
         return result;
     }

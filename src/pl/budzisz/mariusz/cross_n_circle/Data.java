@@ -110,7 +110,6 @@ public class Data implements Serializable {
                 if (!fileExists) {
                     bw.write(convertToString());
                     fileSaved = true;
-                    System.exit(1);
                 } else {
                     System.out.println("Taki plik już istnieje, wybierz inną nazwę.");
                     fileName = input.nextLine();

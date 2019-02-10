@@ -87,12 +87,12 @@ public class CrossNCircleGame {
             activePlayer.move();
             data.printTable();
             gameRules.checkEnd();
-            System.out.println("Zapisać stan gry? 1-tak");
+            /*System.out.println("Zapisać stan gry? 1-tak");
             if (new Scanner(System.in).nextInt() == 1) {
                 data.save();
             } else {
                 System.out.println("Gramy dalej...");
-            }
+            }*/
             if (gameRules.gameOver) {
                 break;
             }

@@ -105,15 +105,8 @@ public class Data implements Serializable {
         ) {
             boolean fileSaved = false;
             while (!fileSaved) {
-                var file = new File(fileName);
-                boolean fileExists = file.exists();
-                if (!fileExists) {
                     bw.write(convertToString());
                     fileSaved = true;
-                } else {
-                    System.out.println("Taki plik już istnieje, wybierz inną nazwę.");
-                    fileName = input.nextLine();
-                }
             }
         } catch (IOException e) {
             System.out.println("Nie udało się zapisać pliku");

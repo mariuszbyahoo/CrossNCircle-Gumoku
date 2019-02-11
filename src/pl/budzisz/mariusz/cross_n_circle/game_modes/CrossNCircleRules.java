@@ -1,16 +1,21 @@
+
 package pl.budzisz.mariusz.cross_n_circle.game_modes;
 
+import pl.budzisz.mariusz.cross_n_circle.CrossNCircleGame;
 import pl.budzisz.mariusz.cross_n_circle.Data;
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CrossNCircleRules extends GameRules {
 
-        public CrossNCircleRules(Data data){
-            super(data);
-        }
+    public CrossNCircleRules(Data data) {
+        super(data);
+    }
 
-        public void checkEnd() {
-            this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash();
+    public void checkEnd() {
+        this.gameOver = endGameInRow() || endGameInColumn() || checkEndInSlash() || checkEndInReverseSlash() || checkDraw();
     }
 
     private boolean endGameInColumn() {
@@ -18,6 +23,11 @@ public class CrossNCircleRules extends GameRules {
         for (int i = 0; i < data.tab.length; i++) {
             if (checkEndInColumn(i)) {
                 result = true;
+                if (data.tab[1][i].equals(Figures.CROSS)) {
+                    CrossNCircleGame.gameStatus = GameStatus.X_WON;
+                } else if (data.tab[1][i].equals(Figures.CIRCLE)) {
+                    CrossNCircleGame.gameStatus = GameStatus.O_WON;
+                }
                 break;
             }
         }
@@ -29,6 +39,11 @@ public class CrossNCircleRules extends GameRules {
         for (int i = 0; i < data.tab.length; i++) {
             if (checkEndInRow(i)) {
                 result = true;
+                if (data.tab[i][1].equals(Figures.CROSS)) {
+                    CrossNCircleGame.gameStatus = GameStatus.X_WON;
+                } else if (data.tab[i][1].equals(Figures.CIRCLE)) {
+                    CrossNCircleGame.gameStatus = GameStatus.O_WON;
+                }
                 break;
             }
         }
@@ -70,6 +85,11 @@ public class CrossNCircleRules extends GameRules {
                 break;
             }
         }
+        if (data.tab[1][1].equals(Figures.CROSS)) {
+            CrossNCircleGame.gameStatus = GameStatus.X_WON;
+        } else if (data.tab[1][1].equals(Figures.CIRCLE)) {
+            CrossNCircleGame.gameStatus = GameStatus.O_WON;
+        }
         return result;
     }
 
@@ -81,6 +101,27 @@ public class CrossNCircleRules extends GameRules {
                 break;
             }
         }
+        if (data.tab[1][data.tab.length - 2].equals(Figures.CROSS)) {
+            CrossNCircleGame.gameStatus = GameStatus.X_WON;
+        } else if (data.tab[1][data.tab.length - 2].equals(Figures.CIRCLE)) {
+            CrossNCircleGame.gameStatus = GameStatus.O_WON;
+        }
         return result;
+    }
+
+    public boolean checkDraw() {
+        if (!CrossNCircleGame.gameStatus.equals(GameStatus.DRAW)) {
+            for (int i = 0; i < data.tab.length; i++) {
+                List<Figures> tabList = Arrays.asList(data.tab[i]);
+                if (tabList.contains(Figures.EMPTY)) {
+                    return false;
+                }
+            }
+            System.out.println("Nie ma juz mozliwosci ruchu...");
+            CrossNCircleGame.gameStatus = GameStatus.DRAW;
+            System.out.println(CrossNCircleGame.gameStatus.getDesc());
+            return true;
+        }
+        return false;
     }
 }

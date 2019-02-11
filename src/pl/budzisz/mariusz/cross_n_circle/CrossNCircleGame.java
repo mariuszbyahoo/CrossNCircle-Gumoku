@@ -2,6 +2,7 @@ package pl.budzisz.mariusz.cross_n_circle;
 
 import pl.budzisz.mariusz.cross_n_circle.figures.Figures;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.GameRules;
+import pl.budzisz.mariusz.cross_n_circle.game_modes.GameStatus;
 import pl.budzisz.mariusz.cross_n_circle.game_modes.RulesFactory;
 import pl.budzisz.mariusz.cross_n_circle.players.Choice;
 import pl.budzisz.mariusz.cross_n_circle.players.Player;
@@ -10,17 +11,14 @@ import pl.budzisz.mariusz.cross_n_circle.view.Window;
 
 import java.util.Scanner;
 
-/**
- * Praca domowa dopracować algorytm by komputer gral w Gumoku.
- * W pierwszej kolejnosci zrob tak by przeszkadzal graczowi czy.
- */
-
 public class CrossNCircleGame {
     Player playerA;
     Player playerB;
     Player activePlayer;
+    boolean isVsComputer;
+    public static GameStatus gameStatus = GameStatus.IN_PROGRESS;
 
-    GameRules gameRules;
+    public static GameRules gameRules;
     static Window window;
 
     int choice;
@@ -36,7 +34,7 @@ public class CrossNCircleGame {
         }
     }
 
-    private void nextRound(Data data){
+    public void nextRound(){
         if(Data.round % 2 == 0){
             activePlayer = playerA;
         }else{
@@ -61,17 +59,24 @@ public class CrossNCircleGame {
 
             playerA = PlayerFactory.getInstance(type , data , false , true, gameRules);
             playerB = PlayerFactory.getInstance(type , data , true , false, gameRules);
+            isVsComputer = true;
 
         } else if (choice == Choice.AIVSAI.ordinal()) {
 
             playerA = PlayerFactory.getInstance(type, data , false , false, gameRules);
             playerB = PlayerFactory.getInstance(type,data , true , false, gameRules);
+            isVsComputer = true;
 
         } else {
 
             playerA = PlayerFactory.getInstance(type,data , false , true, gameRules);
             playerB = PlayerFactory.getInstance(type,data , true , true, gameRules);
+            isVsComputer = false;
         }
+    }
+
+    public Player getActivePlayer(){
+        return activePlayer;
     }
 
     private void play(Data data){
@@ -82,19 +87,25 @@ public class CrossNCircleGame {
             activePlayer.move();
             data.printTable();
             gameRules.checkEnd();
+            /*System.out.println("Zapisać stan gry? 1-tak");
+            if (new Scanner(System.in).nextInt() == 1) {
+                data.save();
+            } else {
+                System.out.println("Gramy dalej...");
+            }*/
             if (gameRules.gameOver) {
                 break;
             }
-            nextRound(data);
+            System.out.println("Nastepna runda...");
+            nextRound();
         }
     }
 
     public static void main(String[] args) {
-        Data data = new Data();
         CrossNCircleGame cross = new CrossNCircleGame();
+        Data data = new Data(cross);
         cross.startGame(data);
-        window = new Window(1200,800,data);
+        window = new Window(1200, 800, data, cross);
         cross.play(data);
-
     }
 }

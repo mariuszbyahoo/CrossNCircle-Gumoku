@@ -16,7 +16,7 @@ public class PlayerHuman extends Player {
     @Override
     public void move() {
         boolean correct = false;
-        while(!correct) {
+        while (!correct) {
             System.out.println("Wiersz numer: ");
             int x = input.nextInt() - 1;
             System.out.println("Kolumna numer: ");
@@ -28,6 +28,10 @@ public class PlayerHuman extends Player {
                 data.tab[x][y] = figure;
                 correct = true;
             }
-        }
+            }
+    }
+
+    public Figures getFigure(){
+        return figure;
     }
 }

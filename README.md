@@ -1,4 +1,4 @@
-# CrossNCircle2
+# CrossNCircle + Gumoku
 A simple console-based implementation of a popular Cross and Circle game, after choosing the size of a map, choosing an enemy, and a figure there will be reated a window with a simple GUI written in Java Swing.
 
 
